@@ -3,8 +3,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class Review {
     private int id;
 
     @Column(name="comment")
+    @NotEmpty(message = "Comment is required")
     private String comment;
 
     @Column(name = "indivusal_rating")
@@ -25,6 +27,7 @@ public class Review {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_review_id", referencedColumnName = "id")
+    @NotNull(message = "User info is must for giving an review")
     private User user;
 
 }

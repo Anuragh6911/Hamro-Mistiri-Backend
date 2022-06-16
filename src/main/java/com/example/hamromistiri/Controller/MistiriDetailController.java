@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,13 +21,13 @@ public class MistiriDetailController {
     private EntityToDtoConverter  converter;
 
     @PostMapping("/mistiri/addMistiri")
-    public HttpStatus addMistiri(@RequestBody MistiriDetail mistiriDetail){
+    public HttpStatus addMistiri(@Valid @RequestBody  MistiriDetail mistiriDetail){
         mistiriDetailsService.addMistiri(mistiriDetail);
         return HttpStatus.OK;
     }
 
     @GetMapping("/mistiris")
-   public List<MistiriDetail> findall(){
+    public List<MistiriDetail> findall(){
        return mistiriDetailsService.findAll();
    }
 
@@ -38,7 +39,7 @@ public class MistiriDetailController {
 
 
    @PostMapping("/mistiri/{id}/addReview")
-    public MistiriDetail addReview(@RequestBody MistiriDetail mistiriDetail , @PathVariable int id){
+    public MistiriDetail addReview( @Valid @RequestBody MistiriDetail mistiriDetail , @PathVariable int id){
         return mistiriDetailsService.addMistiriReview(mistiriDetail,id);
    }
 

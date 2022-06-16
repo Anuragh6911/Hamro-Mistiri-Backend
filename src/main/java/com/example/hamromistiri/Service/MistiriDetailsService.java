@@ -2,6 +2,7 @@ package com.example.hamromistiri.Service;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Model.Review;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
+import com.example.hamromistiri.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class MistiriDetailsService {
     }
 
     public MistiriDetail showReview(int id){
-        return misitiriDetailRepository.findById(id).orElse(null); //ya exception haandelling garna baki cha !!!!!!!!!!
+        return misitiriDetailRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Mistiri not found with id "+id));
     }
 
 }
