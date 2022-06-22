@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.OrderBy;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,21 +32,21 @@ public class MistiriDetailController {
        return mistiriDetailsService.findAll();
    }
 
-   @GetMapping("/mistiris/{address}")
-    public List<MistiriDto> findAllByAddress(@PathVariable String address){
-        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address);
+   @GetMapping("/mistiris/{services}/{address}")
+    public List<MistiriDto> findAllByAddress(@PathVariable String address , @PathVariable String services){
+        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address,services);
         return converter.entityToDto(mistiriDetails);
    }
 
 
-   @PostMapping("/mistiri/{id}/addReview")
-    public MistiriDetail addReview( @Valid @RequestBody MistiriDetail mistiriDetail , @PathVariable int id){
-        return mistiriDetailsService.addMistiriReview(mistiriDetail,id);
-   }
+//   @PostMapping("/mistiri/{id}/addReview")
+//    public MistiriDetail addReview( @Valid @RequestBody MistiriDetail mistiriDetail , @PathVariable int id){
+//        return mistiriDetailsService.addMistiriReview(mistiriDetail,id);
+//   }
 
-   @GetMapping("/mistiri/{id}/getReview")
-    public ShowReviewDto mistiriReview(@PathVariable int id){
-        return converter.mistiriEntityToDto(mistiriDetailsService.showReview(id));
-   }
+//   @GetMapping("/mistiri/{id}/getReview")
+//    public ShowReviewDto mistiriReview(@PathVariable int id){
+//        return converter.mistiriEntityToDto(mistiriDetailsService.showReview(id));
+//   }
 
 }

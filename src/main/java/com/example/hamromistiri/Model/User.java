@@ -38,10 +38,9 @@ public class User {
     private String role;
 
     @Column(name ="phone_number")
-    @NotEmpty(message = "Email cannot be null")
+    @NotEmpty(message = "PhoneNo cannot be null")
     @Length(min = 10, max = 10, message = "Phone number needs to be of 10 digits")
     @Pattern(regexp = "^[1-9]+[0-9]*$" ,message = "Only number is allowed in phoneNo")
-
     private String phoneNo;
 
 }

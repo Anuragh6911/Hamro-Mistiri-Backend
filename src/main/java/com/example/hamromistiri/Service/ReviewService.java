@@ -1,5 +1,4 @@
 package com.example.hamromistiri.Service;
-
 import com.example.hamromistiri.Model.Review;
 import com.example.hamromistiri.Repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +19,8 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
+    public List<Review> showReviews(int id){
+       return reviewRepository.findReviewFromMistiriId(id);
+    }
 
 }

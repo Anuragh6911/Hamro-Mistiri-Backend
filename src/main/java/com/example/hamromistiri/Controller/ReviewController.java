@@ -25,4 +25,9 @@ public class ReviewController {
         reviewService.addReview(review);
         return HttpStatus.OK;
     }
+
+    @GetMapping("/findReviews/{id}")
+    public List<Review> findALlReview(@PathVariable int id){
+        return reviewService.showReviews(id);
+    }
 }
