@@ -30,4 +30,9 @@ public class Review {
     @NotNull(message = "User info is must for giving an review")
     private User user;
 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mistiriReview_id", referencedColumnName = "mistiri_id")
+    private MistiriDetail mistiriDetail;
+
 }

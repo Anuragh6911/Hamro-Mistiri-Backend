@@ -29,10 +29,10 @@ public class MistiriDetail {
     private User user;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mistiri_review_id", referencedColumnName = "mistiri_id")
-    @Valid
-    private List<Review> review;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "mistiri_review_id", referencedColumnName = "mistiri_id")
+//    @Valid
+//    private List<Review> review;
 
     @Column(name ="pan_number")
     @NotEmpty(message = "Pan Number cannot be empty")

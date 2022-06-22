@@ -46,12 +46,12 @@ public class EntityToDtoConverter {
         return reviewDto;
      }
 
-     public ShowReviewDto mistiriEntityToDto(MistiriDetail mistiriDetail){
-        ShowReviewDto showReviewDto = new ShowReviewDto();
-        showReviewDto.setService(mistiriDetail.getService());
-        showReviewDto.setRating(mistiriDetail.getRating());
-        showReviewDto.setReview(mistiriDetail.getReview().stream().map(x -> entityToDto(x)).collect(Collectors.toList()));
-        return  showReviewDto;
-     }
+//     public ShowReviewDto mistiriEntityToDto(MistiriDetail mistiriDetail){
+//        ShowReviewDto showReviewDto = new ShowReviewDto();
+//        showReviewDto.setService(mistiriDetail.getService());
+//        showReviewDto.setRating(mistiriDetail.getRating());
+//        showReviewDto.setReview(mistiriDetail.getReview().stream().map(x -> entityToDto(x)).collect(Collectors.toList()));
+//        return  showReviewDto;
+//     }
 
 }
