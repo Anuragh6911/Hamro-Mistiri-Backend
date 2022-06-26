@@ -65,4 +65,7 @@ public class MistiriDetail {
     @NotEmpty(message = "address cannot be empty")
     private String address;
 
+
+    private int count;
+
 }

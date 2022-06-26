@@ -1,6 +1,5 @@
 package com.example.hamromistiri.Controller;
 
-import com.example.hamromistiri.HamroMistiriApplication;
 import com.example.hamromistiri.Model.Review;
 import com.example.hamromistiri.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ public class ReviewController {
         return reviewService.reviews();
     }
 
-    @PostMapping("/addReview")
-    public HttpStatus addREviews(@RequestBody Review review){
-        reviewService.addReview(review);
+    @PostMapping("/{id}/addReview")
+    public HttpStatus addREviews(@PathVariable int id, @RequestBody Review review){
+        reviewService.addReview(id,review);
         return HttpStatus.OK;
     }
 
