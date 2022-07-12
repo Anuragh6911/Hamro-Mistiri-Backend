@@ -1,28 +1,33 @@
 package com.example.hamromistiri.Controller;
 
-import com.example.hamromistiri.HamroMistiriApplication;
+import com.example.hamromistiri.Converter.EntityToDtoConverter;
+import com.example.hamromistiri.Dto.ReviewDto;
 import com.example.hamromistiri.Model.Review;
 import com.example.hamromistiri.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 public class ReviewController {
 
+   @Autowired
+   private ReviewService reviewService;
+
     @Autowired
-    private ReviewService reviewService;
+    private EntityToDtoConverter converter;
 
     @GetMapping("/findAllReviews")
     public List<Review> findByID(){
         return reviewService.reviews();
     }
 
-    @PostMapping("/addReview")
-    public HttpStatus addREviews(@RequestBody Review review){
-        reviewService.addReview(review);
+    @PostMapping("/{id}/addReview")
+    public HttpStatus addReviews(@PathVariable int id,  @Valid @RequestBody ReviewDto review){
+        reviewService.addReview(id,converter.DtoToEntity(review));
         return HttpStatus.OK;
     }
 

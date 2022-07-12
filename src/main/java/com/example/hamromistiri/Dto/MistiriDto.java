@@ -11,5 +11,5 @@ public class MistiriDto {
        private String aboutYou;
        private Boolean availableStatus;
        private String employeeStatus;
-       private int rating;
+       private double rating;
 }
