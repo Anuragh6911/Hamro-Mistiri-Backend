@@ -2,14 +2,12 @@ package com.example.hamromistiri.Controller;
 
 import com.example.hamromistiri.Converter.EntityToDtoConverter;
 import com.example.hamromistiri.Dto.MistiriDto;
-import com.example.hamromistiri.Dto.ShowReviewDto;
+import com.example.hamromistiri.Dto.MistriAddDto;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Service.MistiriDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.OrderBy;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,8 +20,8 @@ public class MistiriDetailController {
     private EntityToDtoConverter  converter;
 
     @PostMapping("/mistiri/addMistiri")
-    public HttpStatus addMistiri(@Valid @RequestBody  MistiriDetail mistiriDetail){
-        mistiriDetailsService.addMistiri(mistiriDetail);
+    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
+        mistiriDetailsService.addMistiri(converter.DtoToEntity(mistiriDetail));
         return HttpStatus.OK;
     }
 
@@ -37,16 +35,4 @@ public class MistiriDetailController {
         List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address,services);
         return converter.entityToDto(mistiriDetails);
    }
-
-
-//   @PostMapping("/mistiri/{id}/addReview")
-//    public MistiriDetail addReview( @Valid @RequestBody MistiriDetail mistiriDetail , @PathVariable int id){
-//        return mistiriDetailsService.addMistiriReview(mistiriDetail,id);
-//   }
-
-//   @GetMapping("/mistiri/{id}/getReview")
-//    public ShowReviewDto mistiriReview(@PathVariable int id){
-//        return converter.mistiriEntityToDto(mistiriDetailsService.showReview(id));
-//   }
-
 }
