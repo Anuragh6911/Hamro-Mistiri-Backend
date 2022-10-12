@@ -19,7 +19,7 @@ public class ReviewDto {
 
      @NotNull(message = "please enter user details")
      @Valid
-     private UserDto user;
+     private CustomerDto user;
 
      private MistiriDetail mistiriDetail;
 }

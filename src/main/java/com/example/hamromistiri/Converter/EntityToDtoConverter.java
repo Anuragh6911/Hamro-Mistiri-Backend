@@ -1,9 +1,9 @@
 package com.example.hamromistiri.Converter;
 
 import com.example.hamromistiri.Dto.*;
+import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Model.Review;
-import com.example.hamromistiri.Model.User;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,38 +11,38 @@ import java.util.stream.Collectors;
 @Component
 public class EntityToDtoConverter {
 
-    public UserDto entityToDto(User user){
-        UserDto dto = new UserDto();
-        dto.setId(user.getId());
-        dto.setFirstName(user.getFirstName());
-        dto.setLastName(user.getLastName());
+    public CustomerDto entityToDto(Customer customer){
+        CustomerDto dto = new CustomerDto();
+        dto.setId(customer.getId());
+        dto.setFirstName(customer.getFirstName());
+        dto.setLastName(customer.getLastName());
         return dto;
     }
 
-    public User DtoToEntity(UserDto userDto){
-        User user = new User();
-        user.setId(userDto.getId());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        return user;
+    public Customer DtoToEntity(CustomerDto customerDto){
+        Customer customer = new Customer();
+        customer.setId(customerDto.getId());
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        return customer;
     }
 
-    public User DtoToEntity(UserValidationDto userValidationDto){
-        User user = new User();
-        user.setId(userValidationDto.getId());
-        user.setFirstName(userValidationDto.getFirstName());
-        user.setLastName(userValidationDto.getLastName());
-        user.setEmail(userValidationDto.getEmail());
-        user.setPassword(userValidationDto.getPassword());
-        user.setPhoneNo(userValidationDto.getPhoneNo());
-        user.setRole(userValidationDto.getRole());
-        return user;
+    public Customer DtoToEntity(CustomerValidationDto customerValidationDto){
+        Customer customer = new Customer();
+        customer.setId(customerValidationDto.getId());
+        customer.setFirstName(customerValidationDto.getFirstName());
+        customer.setLastName(customerValidationDto.getLastName());
+        customer.setEmail(customerValidationDto.getEmail());
+        customer.setPassword(customerValidationDto.getPassword());
+        customer.setPhoneNo(customerValidationDto.getPhoneNo());
+        customer.setRole(customerValidationDto.getRole());
+        return customer;
     }
 
     public MistiriDetail DtoToEntity(MistriAddDto mistiriDetail){
         MistiriDetail mistiriDetail1 = new MistiriDetail();
         mistiriDetail1.setId(mistiriDetail.getId());
-        mistiriDetail1.setUser(DtoToEntity(mistiriDetail.getUser()));
+        mistiriDetail1.setCustomer(DtoToEntity(mistiriDetail.getUser()));
         mistiriDetail1.setCount(mistiriDetail.getCount());
         mistiriDetail1.setPanNo(mistiriDetail.getPanNo());
         mistiriDetail1.setDocuments(mistiriDetail.getDocuments());
@@ -64,7 +64,7 @@ public class EntityToDtoConverter {
         MistiriDto mistiriDto = new MistiriDto();
         mistiriDto.setMistiriId(mistiriDetail.getId());
         mistiriDto.setAddress(mistiriDetail.getAddress());
-        mistiriDto.setUser(entityToDto(mistiriDetail.getUser()));
+        mistiriDto.setUser(entityToDto(mistiriDetail.getCustomer()));
         mistiriDto.setAboutYou(mistiriDetail.getAboutYou());
         mistiriDto.setRating(mistiriDetail.getRating());
         mistiriDto.setService(mistiriDetail.getService());
@@ -77,7 +77,7 @@ public class EntityToDtoConverter {
         Review review = new Review();
         review.setId(reviewDto.getId());
         review.setComment(reviewDto.getComment());
-        review.setUser(DtoToEntity(reviewDto.getUser()));
+        review.setCustomer(DtoToEntity(reviewDto.getUser()));
         review.setMistiriDetail(reviewDto.getMistiriDetail());
         return  review;
     }

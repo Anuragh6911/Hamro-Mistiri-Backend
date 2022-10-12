@@ -58,7 +58,7 @@ public class ReviewService {
         review1.setMistiriDetail(mistiriDetail);
         review1.setComment(review.getComment());
         review1.setIndivisualRating(review.getIndivisualRating());
-        review1.setUser(review.getUser());
+        review1.setCustomer(review.getCustomer());
         return reviewRepository.save(review1);
     }
 

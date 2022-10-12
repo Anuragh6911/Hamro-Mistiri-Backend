@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name="user")
-public class User {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -30,5 +30,12 @@ public class User {
 
     @Column(name ="phone_number")
     private String phoneNo;
+
+
+    /*
+       dto left to update !!!
+     */
+    @Column(name = "location")
+    private String loction;
 
 }

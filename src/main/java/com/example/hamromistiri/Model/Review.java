@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @AllArgsConstructor
@@ -27,7 +25,7 @@ public class Review {
     @OneToOne(cascade = CascadeType.MERGE)//this merges with the user id so new user wont be created!! You need to pass id here !
     @JoinColumn(name = "user_review_id", referencedColumnName = "id")
     @Valid
-    private User user;
+    private Customer customer;
 
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -10,7 +10,7 @@ public class MistriAddDto {
      private int id;
 
      @Valid
-     private UserValidationDto user;
+     private CustomerValidationDto user;
 
      @NotEmpty(message = "Pan Number cannot be empty")
      @Length( min = 9,max = 9, message = "Pan Number should be of 9 digits")
