@@ -16,8 +16,8 @@ public class MistiriDetail {
     private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
 
     @Column(name ="pan_number")
     private  String panNo;
@@ -41,7 +41,7 @@ public class MistiriDetail {
     private String aboutYou;
 
     @Column(name="address")
-    private String address;
+    private String address; // revise
 
     private int count;
 

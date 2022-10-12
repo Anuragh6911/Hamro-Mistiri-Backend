@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MistiriDto {
        private  int mistiriId;
-       private UserDto user;
+       private CustomerDto user;
        private String address;
        private String service;
        private String aboutYou;

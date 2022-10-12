@@ -25,7 +25,7 @@ public class MistiriDetailsService {
 
         //this is for rating purpose!!! Don't edit this code.
         MistiriDetail mistiriDetail1 = new MistiriDetail();
-        mistiriDetail1.setUser(mistiriDetail.getUser());
+        mistiriDetail1.setCustomer(mistiriDetail.getCustomer());
         mistiriDetail1.setRating(mistiriDetail.getRating());
         mistiriDetail1.setService(mistiriDetail.getService());
         mistiriDetail1.setAddress(mistiriDetail.getAddress());

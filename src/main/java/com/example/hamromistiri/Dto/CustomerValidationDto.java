@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class UserValidationDto {
+public class CustomerValidationDto {
     private int id;
 
     @NotEmpty(message = "FirstName cannot be null")
