@@ -16,19 +16,24 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity <ApiResponse>resourceNotFoundException(ResourceNotFoundException ex, WebRequest webRequest){
-        ApiResponse apiResponse = new ApiResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
+    public ResponseEntity<ApiResponse> resourceNotFoundException(ResourceNotFoundException ex, WebRequest webRequest) {
+        ApiResponse apiResponse = new ApiResponse(new Date(), ex.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity <Map<String,String>> handleMethodNotValidException(MethodArgumentNotValidException ex){
-        Map <String ,String> resp = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) ->{
-            String filedName = ((FieldError)error).getField();
+    public ResponseEntity<Map<String, String>> handleMethodNotValidException(MethodArgumentNotValidException ex) {
+        Map<String, String> resp = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String filedName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
-            resp.put(filedName,message);
+            resp.put(filedName, message);
         });
-        return new ResponseEntity<Map<String,String>>(resp, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Map<String, String>>(resp, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ErrorResponse> handleAppException(AppException ex) {
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), ex.getStatus());
     }
 }
