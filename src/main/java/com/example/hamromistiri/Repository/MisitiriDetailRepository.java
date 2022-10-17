@@ -7,11 +7,23 @@ import java.util.List;
 
 public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,Integer>{
 
-     @Query("select u from MistiriDetail u where  u.address = :address and u.availableStatus=true and u.service= :service order by u.rating desc ")
+     @Query(nativeQuery = true, value = "select *\n" +
+             "from mistiri_detail u\n" +
+             "inner join customer c on u.customer_id = c.id\n" +
+             "where c.location = ?1\n" +
+             "  and u.available_status = true\n" +
+             "  and u.service = ?2\n" +
+             "order by u.rating desc")
      List<MistiriDetail> findAvailableMistiri(String address, String service);
 
 
-    @Query("select u from MistiriDetail u where not u.address = :address and u.availableStatus=true and u.service = :service order by u.rating desc")
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from mistiri_detail u\n" +
+            "         inner join customer c on u.customer_id = c.id\n" +
+            "where not c.location = ?1\n" +
+            "  and u.available_status = true\n" +
+            "  and u.service = ?2\n" +
+            "order by u.rating desc")
     List<MistiriDetail> findNotByAddress( String address, String service);
 
 }

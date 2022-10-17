@@ -15,15 +15,14 @@ public class CustomerController {
     @Autowired
     private CustomerServices customerServices;
 
-    @PostMapping("/addUser")
-    public HttpStatus savingUser(@RequestBody Customer saveuser) {
-        customerServices.saveUser(saveuser);
-        return HttpStatus.OK;
+    @PostMapping("/registerNewCustomer")
+    public Customer registerNewCustomer(@RequestBody Customer customer) {
+        return customerServices.saveCustomer(customer);
     }
 
-    @GetMapping("/findUsers")
-    public List<Customer> findUser(){
-        return customerServices.getUser();
-    }
+//    @GetMapping("/findCustomer")
+//    public List<Customer> getCustomer(){
+//        return customerServices.getCustomer();
+//    }
 
 }

@@ -13,7 +13,7 @@ public class MistiriDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "mistiri_id")
-    private int id;
+    private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -23,7 +23,7 @@ public class MistiriDetail {
     private  String panNo;
 
     @Column(name ="rating")
-    private double rating;
+    private Double rating;
 
     @Column(name ="service")
     private String service;
@@ -40,9 +40,6 @@ public class MistiriDetail {
     @Column(name ="about_you")
     private String aboutYou;
 
-    @Column(name="address")
-    private String address; // revise
-
-    private int count;
+    private Integer count;
 
 }

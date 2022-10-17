@@ -48,7 +48,6 @@ public class EntityToDtoConverter {
         mistiriDetail1.setDocuments(mistiriDetail.getDocuments());
         mistiriDetail1.setService(mistiriDetail.getService());
         mistiriDetail1.setEmployeeStatus(mistiriDetail.getEmployeeStatus());
-        mistiriDetail1.setAddress(mistiriDetail.getAddress());
         mistiriDetail1.setRating(mistiriDetail.getRating());
         mistiriDetail1.setCount(mistiriDetail.getCount());
         mistiriDetail1.setAboutYou(mistiriDetail.getAboutYou());
@@ -63,7 +62,6 @@ public class EntityToDtoConverter {
     public MistiriDto entityToDto(MistiriDetail mistiriDetail){
         MistiriDto mistiriDto = new MistiriDto();
         mistiriDto.setMistiriId(mistiriDetail.getId());
-        mistiriDto.setAddress(mistiriDetail.getAddress());
         mistiriDto.setUser(entityToDto(mistiriDetail.getCustomer()));
         mistiriDto.setAboutYou(mistiriDetail.getAboutYou());
         mistiriDto.setRating(mistiriDetail.getRating());
