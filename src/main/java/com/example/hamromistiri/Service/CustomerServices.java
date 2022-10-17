@@ -13,7 +13,7 @@ public class CustomerServices {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer saveUser(Customer customer){
+    public Customer saveCustomer(Customer customer){
         return customerRepository.save(customer);
     }
 

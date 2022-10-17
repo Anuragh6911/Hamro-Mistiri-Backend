@@ -2,12 +2,19 @@ package com.example.hamromistiri.Controller;
 
 import com.example.hamromistiri.Converter.EntityToDtoConverter;
 import com.example.hamromistiri.Dto.MistiriDto;
+import com.example.hamromistiri.Dto.MistiriSignupRequest;
 import com.example.hamromistiri.Dto.MistriAddDto;
+import com.example.hamromistiri.Dto.UserLoginRequest;
+import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Service.MistiriDetailsService;
+import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -18,6 +25,22 @@ public class MistiriDetailController {
 
     @Autowired
     private EntityToDtoConverter  converter;
+
+    @PostMapping("/registerMistiri")
+    public MistiriDetail signUpMistiri(@Valid @RequestBody MistiriSignupRequest request) throws AppException {
+        return mistiriDetailsService.registerMistiri(request);
+    }
+
+    @PostMapping("/loginUser")
+    public ResponseEntity<?> loginUser(@RequestBody UserLoginRequest request, HttpSession session) throws AppException {
+        Customer customer = mistiriDetailsService.loginUser(request);
+        session.setAttribute("id", customer.getId());
+        session.setAttribute("email", customer.getEmail());
+        session.setAttribute("firstName", customer.getFirstName());
+        session.setAttribute("lastName", customer.getLastName());
+
+        return ResponseEntity.ok("Logged in Successfully.");
+    }
 
     @PostMapping("/mistiri/addMistiri")
     public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
