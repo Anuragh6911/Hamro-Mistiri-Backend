@@ -1,32 +1,70 @@
 package com.example.hamromistiri.Converter;
 
-import com.example.hamromistiri.Dto.MistiriDto;
-import com.example.hamromistiri.Dto.ReviewDto;
-import com.example.hamromistiri.Dto.ShowReviewDto;
-import com.example.hamromistiri.Dto.UserDto;
+import com.example.hamromistiri.Dto.*;
+import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Model.Review;
-import com.example.hamromistiri.Model.User;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class EntityToDtoConverter {
 
-    public UserDto entityToDto(User user){
-        UserDto dto = new UserDto();
-        dto.setFirstName(user.getFirstName());
-        dto.setLastName(user.getLastName());
+    public CustomerDto entityToDto(Customer customer){
+        CustomerDto dto = new CustomerDto();
+        dto.setId(customer.getId());
+        dto.setFirstName(customer.getFirstName());
+        dto.setLastName(customer.getLastName());
         return dto;
     }
+
+    public Customer DtoToEntity(CustomerDto customerDto){
+        Customer customer = new Customer();
+        customer.setId(customerDto.getId());
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        return customer;
+    }
+
+    public Customer DtoToEntity(CustomerValidationDto customerValidationDto){
+        Customer customer = new Customer();
+        customer.setId(customerValidationDto.getId());
+        customer.setFirstName(customerValidationDto.getFirstName());
+        customer.setLastName(customerValidationDto.getLastName());
+        customer.setEmail(customerValidationDto.getEmail());
+        customer.setPassword(customerValidationDto.getPassword());
+        customer.setPhoneNo(customerValidationDto.getPhoneNo());
+        customer.setRole(customerValidationDto.getRole());
+        return customer;
+    }
+
+    public MistiriDetail DtoToEntity(MistriAddDto mistiriDetail){
+        MistiriDetail mistiriDetail1 = new MistiriDetail();
+        mistiriDetail1.setId(mistiriDetail.getId());
+        mistiriDetail1.setCustomer(DtoToEntity(mistiriDetail.getUser()));
+        mistiriDetail1.setCount(mistiriDetail.getCount());
+        mistiriDetail1.setPanNo(mistiriDetail.getPanNo());
+        mistiriDetail1.setDocuments(mistiriDetail.getDocuments());
+        mistiriDetail1.setService(mistiriDetail.getService());
+        mistiriDetail1.setEmployeeStatus(mistiriDetail.getEmployeeStatus());
+        mistiriDetail1.setAddress(mistiriDetail.getAddress());
+        mistiriDetail1.setRating(mistiriDetail.getRating());
+        mistiriDetail1.setCount(mistiriDetail.getCount());
+        mistiriDetail1.setAboutYou(mistiriDetail.getAboutYou());
+        return mistiriDetail1;
+    }
+
+     public List<MistiriDto> entityToDto(List<MistiriDetail> mistiriDetails){
+        return mistiriDetails.stream().map(x -> entityToDto(x)).collect(Collectors.toList());
+     }
+
 
     public MistiriDto entityToDto(MistiriDetail mistiriDetail){
         MistiriDto mistiriDto = new MistiriDto();
         mistiriDto.setMistiriId(mistiriDetail.getId());
         mistiriDto.setAddress(mistiriDetail.getAddress());
-        mistiriDto.setUser(entityToDto(mistiriDetail.getUser()));
+        mistiriDto.setUser(entityToDto(mistiriDetail.getCustomer()));
         mistiriDto.setAboutYou(mistiriDetail.getAboutYou());
         mistiriDto.setRating(mistiriDetail.getRating());
         mistiriDto.setService(mistiriDetail.getService());
@@ -35,23 +73,15 @@ public class EntityToDtoConverter {
         return mistiriDto;
     }
 
-     public List<MistiriDto> entityToDto(List<MistiriDetail> mistiriDetails){
-        return mistiriDetails.stream().map(x -> entityToDto(x)).collect(Collectors.toList());
-     }
+    public Review DtoToEntity(ReviewDto reviewDto){
+        Review review = new Review();
+        review.setId(reviewDto.getId());
+        review.setComment(reviewDto.getComment());
+        review.setCustomer(DtoToEntity(reviewDto.getUser()));
+        review.setMistiriDetail(reviewDto.getMistiriDetail());
+        return  review;
+    }
 
-     public ReviewDto entityToDto(Review review){
-        ReviewDto reviewDto = new ReviewDto();
-        reviewDto.setComment(review.getComment());
-        reviewDto.setUser(entityToDto(review.getUser()));
-        return reviewDto;
-     }
 
-//     public ShowReviewDto mistiriEntityToDto(MistiriDetail mistiriDetail){
-//        ShowReviewDto showReviewDto = new ShowReviewDto();
-//        showReviewDto.setService(mistiriDetail.getService());
-//        showReviewDto.setRating(mistiriDetail.getRating());
-//        showReviewDto.setReview(mistiriDetail.getReview().stream().map(x -> entityToDto(x)).collect(Collectors.toList()));
-//        return  showReviewDto;
-//     }
 
 }

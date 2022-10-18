@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class MistiriDto {
        private  int mistiriId;
-       private UserDto user;
+       private CustomerDto user;
        private String address;
        private String service;
        private String aboutYou;
        private Boolean availableStatus;
        private String employeeStatus;
-       private int rating;
+       private double rating;
 }
