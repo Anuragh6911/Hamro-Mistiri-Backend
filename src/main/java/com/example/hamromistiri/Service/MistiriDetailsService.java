@@ -1,14 +1,13 @@
 package com.example.hamromistiri.Service;
 
 import com.example.hamromistiri.Dto.MistiriSignupRequest;
-import com.example.hamromistiri.Dto.UserLoginRequest;
+import com.example.hamromistiri.Dto.MistiriLoginRequest;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Repository.CustomerRepository;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
 import com.example.hamromistiri.exception.AppException;
 import com.example.hamromistiri.exception.ResourceNotFoundException;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -72,7 +70,7 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.save(mistiri);
     }
 
-    public Customer loginUser(UserLoginRequest request) throws AppException {
+    public Customer loginMistiri(MistiriLoginRequest request) throws AppException {
         Customer customer = customerRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new AppException("User not found for this email", HttpStatus.BAD_REQUEST));
 

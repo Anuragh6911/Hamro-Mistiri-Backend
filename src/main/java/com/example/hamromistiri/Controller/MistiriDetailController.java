@@ -4,7 +4,7 @@ import com.example.hamromistiri.Converter.EntityToDtoConverter;
 import com.example.hamromistiri.Dto.MistiriDto;
 import com.example.hamromistiri.Dto.MistiriSignupRequest;
 import com.example.hamromistiri.Dto.MistriAddDto;
-import com.example.hamromistiri.Dto.UserLoginRequest;
+import com.example.hamromistiri.Dto.MistiriLoginRequest;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Service.MistiriDetailsService;
@@ -31,9 +31,9 @@ public class MistiriDetailController {
         return mistiriDetailsService.registerMistiri(request);
     }
 
-    @PostMapping("/loginUser")
-    public ResponseEntity<?> loginUser(@RequestBody UserLoginRequest request, HttpSession session) throws AppException {
-        Customer customer = mistiriDetailsService.loginUser(request);
+    @PostMapping("/loginMistiri")
+    public ResponseEntity<?> loginMistiri(@RequestBody MistiriLoginRequest request, HttpSession session) throws AppException {
+        Customer customer = mistiriDetailsService.loginMistiri(request);
         session.setAttribute("id", customer.getId());
         session.setAttribute("email", customer.getEmail());
         session.setAttribute("firstName", customer.getFirstName());
