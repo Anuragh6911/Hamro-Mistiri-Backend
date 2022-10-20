@@ -45,6 +45,7 @@ public class MistiriSignupRequest {
     @NotEmpty(message = "Service field cannot be empty")
     private String service;
 
+
     private Boolean availableStatus;
 
     @NotEmpty(message = "Employee Status cannot be empty")

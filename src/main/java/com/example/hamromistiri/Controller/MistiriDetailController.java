@@ -38,15 +38,14 @@ public class MistiriDetailController {
         session.setAttribute("email", customer.getEmail());
         session.setAttribute("firstName", customer.getFirstName());
         session.setAttribute("lastName", customer.getLastName());
-
         return ResponseEntity.ok("Logged in Successfully.");
     }
 
-    @PostMapping("/mistiri/addMistiri")
-    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
-        mistiriDetailsService.addMistiri(converter.DtoToEntity(mistiriDetail));
-        return HttpStatus.OK;
-    }
+//    @PostMapping("/mistiri/addMistiri")
+//    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
+//        mistiriDetailsService.addMistiri(converter.DtoToEntity(mistiriDetail));
+//        return HttpStatus.OK;
+//    }
 
     @GetMapping("/mistiris")
     public List<MistiriDetail> findall(){
