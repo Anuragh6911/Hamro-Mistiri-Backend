@@ -31,10 +31,6 @@ public class Customer {
     @Column(name ="phone_number")
     private String phoneNo;
 
-
-    /*
-       dto left to update !!!
-     */
     @Column(name = "location")
     private String loction;
 
