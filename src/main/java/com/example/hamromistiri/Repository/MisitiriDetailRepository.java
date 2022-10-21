@@ -26,4 +26,12 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
             "order by u.rating desc")
     List<MistiriDetail> findNotByAddress( String address, String service);
 
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from mistiri_detail u\n" +
+            "  where u.available_status = true\n" +
+            "  and u.service = ?1\n" +
+            "order by u.rating desc")
+    List<MistiriDetail> findByServices(String service);
+
 }
