@@ -57,4 +57,10 @@ public class MistiriDetailController {
         List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address,services);
         return converter.entityToDto(mistiriDetails);
    }
+
+   @GetMapping("/mistiris/{service}")
+   public List<MistiriDetail> findByAddress(@PathVariable String service){
+        List<MistiriDetail> mistiriDetails = mistiriDetailsService.findByService(service);
+        return mistiriDetails;
+   }
 }

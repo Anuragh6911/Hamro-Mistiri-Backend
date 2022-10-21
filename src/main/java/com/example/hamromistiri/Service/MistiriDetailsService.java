@@ -123,4 +123,9 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Mistiri not found with id " + id));
     }
 
+    public List<MistiriDetail> findByService(String service){
+        return misitiriDetailRepository.findByServices(service);
+    }
+
+
 }
