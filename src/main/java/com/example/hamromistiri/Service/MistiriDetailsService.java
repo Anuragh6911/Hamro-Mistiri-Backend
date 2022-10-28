@@ -30,6 +30,9 @@ public class MistiriDetailsService {
     @Autowired
     private FileUploadService fileUploadService;
 
+    @Autowired
+    private EmailSenderService emailSender;
+
     @Transactional
     public MistiriDetail registerMistiri(MistiriSignupRequest request) throws AppException {
 
@@ -70,7 +73,15 @@ public class MistiriDetailsService {
         mistiri.setCount(request.getCount());
         mistiri.setDocuments(fileLocation);
 
-        return misitiriDetailRepository.save(mistiri);
+        MistiriDetail saved = misitiriDetailRepository.save(mistiri);
+
+        //
+        emailSender.sendEmail(saved.getCustomer().getEmail(),
+                "Hello " + saved.getCustomer().getFirstName() + ", \n" +
+                        "Your account has been registered in Hamro Mistiri.",
+                "Welcome");
+
+        return saved;
     }
 
     public Customer loginMistiri(MistiriLoginRequest request) throws AppException {
