@@ -21,6 +21,7 @@ public class EmailSenderService {
         message.setFrom("hamromistiri@gmail.com");
         message.setTo(toEmail);
         message.setText(body);
+        message.setSubject(subject);
 
         javaMailSender.send(message);
         System.out.println("Mail Sent! ");
