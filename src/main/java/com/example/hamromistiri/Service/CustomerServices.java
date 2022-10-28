@@ -2,10 +2,7 @@ package com.example.hamromistiri.Service;
 
 import com.example.hamromistiri.Dto.CustomerLoginRequest;
 import com.example.hamromistiri.Dto.CustomerSignupRequest;
-import com.example.hamromistiri.Dto.MistiriLoginRequest;
-import com.example.hamromistiri.Dto.MistiriSignupRequest;
 import com.example.hamromistiri.Model.Customer;
-import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Repository.CustomerRepository;
 import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,8 @@ public class CustomerServices {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private EmailSenderService emailSender;
 
     public Customer registerCustomer(CustomerSignupRequest request) throws AppException {
 
@@ -48,7 +47,15 @@ public class CustomerServices {
 
         customer = customerRepository.saveAndFlush(customer);
 
-        return customerRepository.save(customer);
+        Customer saved = customerRepository.save(customer);
+
+        //send email
+        emailSender.sendEmail(saved.getEmail(),
+                "Hello " + saved.getFirstName() + " Sir/Ma'am, \n" +
+                        "Your account has been registered in Hamro Mistiri.",
+                "Welcome");
+
+        return saved;
     }
 
     public Customer loginCustomer(CustomerLoginRequest request) throws AppException {
@@ -69,7 +76,7 @@ public class CustomerServices {
 //        return customerRepository.save(customer);
 //    }
 
-    public List<Customer> getUser(){
+    public List<Customer> getUser() {
         return customerRepository.findAll();
     }
 

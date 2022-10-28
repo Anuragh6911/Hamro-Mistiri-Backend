@@ -13,8 +13,11 @@ public class ProblemService {
     @Autowired private SmsService smsService;
     public Problem saveProblem(Problem problem ){
         Problem saved = problemRepository.save(problem);
+
+        // sending sms
         String message = "Hello, Sir "+saved.getCustomer().getFirstName()+" "+saved.getCustomer().getLastName()+" hired you. Please check your email. ";
         smsService.sendSms(saved.getMistiriDetail().getCustomer().getPhoneNo(),message);
+
         return saved;
     }
 
