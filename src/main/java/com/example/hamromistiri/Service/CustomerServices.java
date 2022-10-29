@@ -2,10 +2,7 @@ package com.example.hamromistiri.Service;
 
 import com.example.hamromistiri.Dto.CustomerLoginRequest;
 import com.example.hamromistiri.Dto.CustomerSignupRequest;
-import com.example.hamromistiri.Dto.MistiriLoginRequest;
-import com.example.hamromistiri.Dto.MistiriSignupRequest;
 import com.example.hamromistiri.Model.Customer;
-import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Repository.CustomerRepository;
 import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +41,7 @@ public class CustomerServices {
         customer.setEmail(request.getEmail());
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Customer");
-        customer.setLoction(request.getLocation());
+        customer.setLocation(request.getLocation());
 
         customer = customerRepository.saveAndFlush(customer);
 
