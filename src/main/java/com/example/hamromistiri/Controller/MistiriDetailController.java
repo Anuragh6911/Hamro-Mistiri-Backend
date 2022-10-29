@@ -42,11 +42,6 @@ public class MistiriDetailController {
         return ResponseEntity.ok("Logged in Successfully.");
     }
 
-//    @PostMapping("/mistiri/addMistiri")
-//    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
-//        mistiriDetailsService.addMistiri(converter.DtoToEntity(mistiriDetail));
-//        return HttpStatus.OK;
-//    }
 
     @GetMapping("/mistiris")
     public List<MistiriDetail> findall(){
@@ -54,9 +49,9 @@ public class MistiriDetailController {
    }
 
    @GetMapping("/mistiris/{services}/{address}")
-    public List<MistiriDto> findAllByAddress(@PathVariable String address , @PathVariable String services){
-        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address,services);
-        return converter.entityToDto(mistiriDetails);
+    public List<MistiriDetail> findAllByAddress( @PathVariable String services, @PathVariable String address){
+        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(services,address);
+        return mistiriDetails;
    }
 
    @GetMapping("/mistiris/{service}")

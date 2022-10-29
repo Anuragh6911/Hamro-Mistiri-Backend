@@ -43,7 +43,7 @@ public class CustomerServices {
         customer.setEmail(request.getEmail());
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Customer");
-        customer.setLoction(request.getLocation());
+        customer.setLocation(request.getLocation());
 
         customer = customerRepository.saveAndFlush(customer);
 
