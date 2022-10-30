@@ -33,6 +33,9 @@ public class MistiriDetailsService {
     @Autowired
     private EmailSenderService emailSender;
 
+    @Autowired
+    private GenerateTokenService generateTokenService;
+
     @Transactional
     public MistiriDetail registerMistiri(MistiriSignupRequest request) throws AppException {
 
@@ -58,6 +61,7 @@ public class MistiriDetailsService {
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Mistiri");
         customer.setLoction(request.getLocation());
+        customer.setIsVerified(false);
 
         customer = customerRepository.saveAndFlush(customer);
 
@@ -75,11 +79,16 @@ public class MistiriDetailsService {
 
         MistiriDetail saved = misitiriDetailRepository.save(mistiri);
 
-        //
+        //generating  a verification token
+        String token = generateTokenService.generateToken();
+        customer.setRandomToken(token);
+
+        //sending email
         emailSender.sendEmail(saved.getCustomer().getEmail(),
                 "Hello " + saved.getCustomer().getFirstName() + ", \n" +
-                        "Your account has been registered in Hamro Mistiri.",
-                "Welcome");
+                        "Please click the link below to verify your account. \n" +
+                        "http://localhost:8080/verify/mistiri/" + saved.getCustomer().getId() + "/" + saved.getCustomer().getRandomToken(),
+                "Please Verify your account");
 
         return saved;
     }
@@ -96,6 +105,22 @@ public class MistiriDetailsService {
         }
         // if we throw exception then rest of the code doesn't run in a method
         return customer;
+    }
+
+    public String verify(int id, String token) {
+        Customer c1 = customerRepository.findById(id);
+        String urlToken = token;
+        String dbToken = c1.getRandomToken();
+
+        if (!urlToken.equals(dbToken)) {
+            throw new AppException("Token invalid", HttpStatus.FORBIDDEN);
+        }
+
+        c1.setIsVerified(true);
+        customerRepository.save(c1);
+        String message = "Your account is now activated";
+
+        return message;
     }
 
 

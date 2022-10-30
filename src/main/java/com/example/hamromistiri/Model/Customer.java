@@ -34,4 +34,10 @@ public class Customer {
     @Column(name = "location")
     private String loction;
 
+    @Column(name = "isVerified")
+    private Boolean isVerified;
+
+    @Column(name = "randomToken")
+    private String randomToken ;
+
 }
