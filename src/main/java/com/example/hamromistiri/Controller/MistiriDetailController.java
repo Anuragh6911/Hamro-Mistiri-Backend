@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("*") //.env file limited allowed origins
 public class MistiriDetailController {
     @Autowired
     private MistiriDetailsService mistiriDetailsService;
@@ -42,6 +42,8 @@ public class MistiriDetailController {
         return ResponseEntity.ok("Logged in Successfully.");
     }
 
+
+
     @GetMapping("/verify/mistiri/{id}/{token}")
     public String verifyCustomer(@PathVariable int id,
                                  @PathVariable String token){
@@ -55,15 +57,16 @@ public class MistiriDetailController {
 //        return HttpStatus.OK;
 //    }
 
+
     @GetMapping("/mistiris")
     public List<MistiriDetail> findall(){
        return mistiriDetailsService.findAll();
    }
 
    @GetMapping("/mistiris/{services}/{address}")
-    public List<MistiriDto> findAllByAddress(@PathVariable String address , @PathVariable String services){
-        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address,services);
-        return converter.entityToDto(mistiriDetails);
+    public List<MistiriDetail> findAllByAddress( @PathVariable String services, @PathVariable String address){
+        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(services,address);
+        return mistiriDetails;
    }
 
    @GetMapping("/mistiris/{service}")

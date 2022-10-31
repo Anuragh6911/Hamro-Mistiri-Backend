@@ -32,7 +32,7 @@ public class Customer {
     private String phoneNo;
 
     @Column(name = "location")
-    private String loction;
+    private String location;
 
     @Column(name = "isVerified")
     private Boolean isVerified;

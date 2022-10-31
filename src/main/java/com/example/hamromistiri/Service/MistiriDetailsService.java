@@ -60,8 +60,12 @@ public class MistiriDetailsService {
         customer.setEmail(request.getEmail());
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Mistiri");
+
+        
+
         customer.setLoction(request.getLocation());
         customer.setIsVerified(false);
+
 
         customer = customerRepository.saveAndFlush(customer);
 
@@ -148,10 +152,10 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.save(mistiriDetail);
     }
 
-    public List<MistiriDetail> findByMistiri(String address, String service) {
+    public List<MistiriDetail> findByMistiri( String service,String address) {
         List<MistiriDetail> mistiriDetails = new ArrayList<>();
-        mistiriDetails.addAll(misitiriDetailRepository.findAvailableMistiri(address, service));
-        mistiriDetails.addAll(misitiriDetailRepository.findNotByAddress(address, service));
+        mistiriDetails.addAll(misitiriDetailRepository.findAvailableMistiri( service, address));
+//        mistiriDetails.addAll(misitiriDetailRepository.findNotByAddress(service, address));
         return mistiriDetails;
     }
 

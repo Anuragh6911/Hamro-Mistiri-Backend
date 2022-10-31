@@ -10,21 +10,21 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
      @Query(nativeQuery = true, value = "select *\n" +
              "from mistiri_detail u\n" +
              "inner join customer c on u.customer_id = c.id\n" +
-             "where c.location = ?1\n" +
+             "where c.location = ?2\n" +
              "  and u.available_status = true\n" +
-             "  and u.service = ?2\n" +
+             "  and u.service = ?1\n" +
              "order by u.rating desc")
-     List<MistiriDetail> findAvailableMistiri(String address, String service);
+     List<MistiriDetail> findAvailableMistiri( String service,String address);
 
 
     @Query(nativeQuery = true, value = "select *\n" +
             "from mistiri_detail u\n" +
             "         inner join customer c on u.customer_id = c.id\n" +
-            "where not c.location = ?1\n" +
+            "where not c.location = ?2\n" +
             "  and u.available_status = true\n" +
-            "  and u.service = ?2\n" +
+            "  and u.service = ?1\n" +
             "order by u.rating desc")
-    List<MistiriDetail> findNotByAddress( String address, String service);
+    List<MistiriDetail> findNotByAddress( String service,String address);
 
 
     @Query(nativeQuery = true, value = "select *\n" +
