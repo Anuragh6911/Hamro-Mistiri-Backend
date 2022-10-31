@@ -63,7 +63,7 @@ public class MistiriDetailsService {
 
         
 
-        customer.setLoction(request.getLocation());
+        //customer.setLoction(request.getLocation());
         customer.setIsVerified(false);
 
 

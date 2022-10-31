@@ -1,5 +1,6 @@
 package com.example.hamromistiri.Controller;
 
+import com.example.hamromistiri.Dto.ApiResponse;
 import com.example.hamromistiri.Dto.CustomerLoginRequest;
 import com.example.hamromistiri.Dto.CustomerSignupRequest;
 import com.example.hamromistiri.Model.Customer;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("*") //.env file limited allowed origins
 public class CustomerController {
     @Autowired
     private CustomerServices customerServices;
@@ -31,7 +33,7 @@ public class CustomerController {
         session.setAttribute("firstName", customer.getFirstName());
         session.setAttribute("lastName", customer.getLastName());
 
-        return ResponseEntity.ok("Logged in Successfully.");
+        return ResponseEntity.ok(new ApiResponse(customer,"Logged in successfully"));
     }
     @GetMapping("/verify/customer/{id}/{token}")
     public String verifyCustomer(@PathVariable int id,

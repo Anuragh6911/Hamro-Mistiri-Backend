@@ -48,7 +48,7 @@ public class CustomerServices {
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Customer");
 
-        customer.setLoction(request.getLocation());
+       // customer.setLoction(request.getLocation());
         customer.setIsVerified(false);
 
         //generating  a verification token
