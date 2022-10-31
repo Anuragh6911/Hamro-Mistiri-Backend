@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("*") //.env file limited allowed origins
 public class MistiriDetailController {
     @Autowired
     private MistiriDetailsService mistiriDetailsService;

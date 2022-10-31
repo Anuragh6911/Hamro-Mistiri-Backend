@@ -126,7 +126,7 @@ public class MistiriDetailsService {
     public List<MistiriDetail> findByMistiri( String service,String address) {
         List<MistiriDetail> mistiriDetails = new ArrayList<>();
         mistiriDetails.addAll(misitiriDetailRepository.findAvailableMistiri( service, address));
-        mistiriDetails.addAll(misitiriDetailRepository.findNotByAddress(service, address));
+//        mistiriDetails.addAll(misitiriDetailRepository.findNotByAddress(service, address));
         return mistiriDetails;
     }
 
