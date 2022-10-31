@@ -43,6 +43,21 @@ public class MistiriDetailController {
     }
 
 
+
+    @GetMapping("/verify/mistiri/{id}/{token}")
+    public String verifyCustomer(@PathVariable int id,
+                                 @PathVariable String token){
+        return mistiriDetailsService.verify(id,token);
+
+    }
+
+//    @PostMapping("/mistiri/addMistiri")
+//    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
+//        mistiriDetailsService.addMistiri(converter.DtoToEntity(mistiriDetail));
+//        return HttpStatus.OK;
+//    }
+
+
     @GetMapping("/mistiris")
     public List<MistiriDetail> findall(){
        return mistiriDetailsService.findAll();

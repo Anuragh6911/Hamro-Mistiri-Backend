@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmailSenderService {
-
     private final JavaMailSender javaMailSender;
 
     public void sendEmail(String toEmail,

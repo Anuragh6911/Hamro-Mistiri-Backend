@@ -34,5 +34,9 @@ public class CustomerSignupRequest {
     @NotEmpty(message = "address cannot be empty")
     private String location;
 
+    private Boolean isVerified;
+
+    private String randomToken;
+
 
 }

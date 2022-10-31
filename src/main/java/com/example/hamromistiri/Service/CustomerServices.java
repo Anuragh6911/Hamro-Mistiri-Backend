@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServices {
@@ -19,6 +20,9 @@ public class CustomerServices {
     private CustomerRepository customerRepository;
     @Autowired
     private EmailSenderService emailSender;
+
+    @Autowired
+    private GenerateTokenService generateTokenService;
 
     public Customer registerCustomer(CustomerSignupRequest request) throws AppException {
 
@@ -43,7 +47,14 @@ public class CustomerServices {
         customer.setEmail(request.getEmail());
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Customer");
-        customer.setLocation(request.getLocation());
+
+        customer.setLoction(request.getLocation());
+        customer.setIsVerified(false);
+
+        //generating  a verification token
+        String token = generateTokenService.generateToken();
+        customer.setRandomToken(token);
+
 
         customer = customerRepository.saveAndFlush(customer);
 
@@ -51,9 +62,10 @@ public class CustomerServices {
 
         //send email
         emailSender.sendEmail(saved.getEmail(),
-                "Hello " + saved.getFirstName() + " Sir/Ma'am, \n" +
-                        "Your account has been registered in Hamro Mistiri.",
-                "Welcome");
+                "Hello " + saved.getFirstName() + ", \n" +
+                        "Please click the link below to verify your account. \n" +
+                        "http://localhost:8080/verify/customer/" + customer.getId() + "/" + customer.getRandomToken(),
+                "Please Verify your account");
 
         return saved;
     }
@@ -71,6 +83,25 @@ public class CustomerServices {
         // if we throw exception then rest of the code doesn't run in a method
         return customer;
     }
+
+    public String verify(int id, String token) {
+        Customer c1 = customerRepository.findById(id);
+        String urlToken = token;
+        String dbToken = c1.getRandomToken();
+
+        if (!urlToken.equals(dbToken)) {
+            throw new AppException("Token invalid", HttpStatus.FORBIDDEN);
+        }
+
+        c1.setIsVerified(true);
+        customerRepository.save(c1);
+        String message = "Your account is now activated";
+
+        return message;
+    }
+
+
+
 
 //    public Customer saveCustomer(Customer customer){
 //        return customerRepository.save(customer);
