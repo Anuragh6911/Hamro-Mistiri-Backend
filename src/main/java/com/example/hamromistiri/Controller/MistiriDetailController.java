@@ -1,10 +1,7 @@
 package com.example.hamromistiri.Controller;
 
 import com.example.hamromistiri.Converter.EntityToDtoConverter;
-import com.example.hamromistiri.Dto.MistiriDto;
-import com.example.hamromistiri.Dto.MistiriSignupRequest;
-import com.example.hamromistiri.Dto.MistriAddDto;
-import com.example.hamromistiri.Dto.MistiriLoginRequest;
+import com.example.hamromistiri.Dto.*;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Service.MistiriDetailsService;
@@ -39,8 +36,10 @@ public class MistiriDetailController {
         session.setAttribute("email", customer.getEmail());
         session.setAttribute("firstName", customer.getFirstName());
         session.setAttribute("lastName", customer.getLastName());
-        return ResponseEntity.ok("Logged in Successfully.");
+        return ResponseEntity.ok(new ApiResponse(customer,"Logged in successfully"));
     }
+
+
 
 
 
