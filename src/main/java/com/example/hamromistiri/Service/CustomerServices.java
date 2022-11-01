@@ -47,12 +47,14 @@ public class CustomerServices {
         customer.setEmail(request.getEmail());
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Customer");
-        customer.setLoction(request.getLocation());
+
+       // customer.setLoction(request.getLocation());
         customer.setIsVerified(false);
 
         //generating  a verification token
         String token = generateTokenService.generateToken();
         customer.setRandomToken(token);
+
 
         customer = customerRepository.saveAndFlush(customer);
 

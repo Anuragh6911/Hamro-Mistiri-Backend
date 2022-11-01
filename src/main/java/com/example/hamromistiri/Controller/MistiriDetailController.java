@@ -1,10 +1,7 @@
 package com.example.hamromistiri.Controller;
 
 import com.example.hamromistiri.Converter.EntityToDtoConverter;
-import com.example.hamromistiri.Dto.MistiriDto;
-import com.example.hamromistiri.Dto.MistiriSignupRequest;
-import com.example.hamromistiri.Dto.MistriAddDto;
-import com.example.hamromistiri.Dto.MistiriLoginRequest;
+import com.example.hamromistiri.Dto.*;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Service.MistiriDetailsService;
@@ -19,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("*") //.env file limited allowed origins
 public class MistiriDetailController {
     @Autowired
     private MistiriDetailsService mistiriDetailsService;
@@ -39,8 +36,12 @@ public class MistiriDetailController {
         session.setAttribute("email", customer.getEmail());
         session.setAttribute("firstName", customer.getFirstName());
         session.setAttribute("lastName", customer.getLastName());
-        return ResponseEntity.ok("Logged in Successfully.");
+        return ResponseEntity.ok(new ApiResponse(customer,"Logged in successfully"));
     }
+
+
+
+
 
     @GetMapping("/verify/mistiri/{id}/{token}")
     public String verifyCustomer(@PathVariable int id,
@@ -55,15 +56,16 @@ public class MistiriDetailController {
 //        return HttpStatus.OK;
 //    }
 
+
     @GetMapping("/mistiris")
     public List<MistiriDetail> findall(){
        return mistiriDetailsService.findAll();
    }
 
    @GetMapping("/mistiris/{services}/{address}")
-    public List<MistiriDto> findAllByAddress(@PathVariable String address , @PathVariable String services){
-        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(address,services);
-        return converter.entityToDto(mistiriDetails);
+    public List<MistiriDetail> findAllByAddress( @PathVariable String services, @PathVariable String address){
+        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(services,address);
+        return mistiriDetails;
    }
 
    @GetMapping("/mistiris/{service}")
