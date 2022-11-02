@@ -12,9 +12,9 @@ public class ProblemController {
     private ProblemService problemService;
 
 
-    @PostMapping("/addProblem")
-    public Problem addProblem(@RequestBody Problem problem){
-        return problemService.saveProblem(problem);
+    @PostMapping("/{uid}/addProblem/{mid}")
+    public Problem addProblem(@RequestBody Problem problem, @PathVariable int uid, @PathVariable int mid){
+        return problemService.saveProblem(problem, uid, mid);
     }
 
     @GetMapping("/viewProblem/{id}")
