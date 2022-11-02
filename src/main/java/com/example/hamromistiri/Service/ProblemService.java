@@ -25,17 +25,27 @@ public class ProblemService {
     @Autowired
     private SmsService smsService;
 
+    @Autowired
+    private EmailSenderService emailSender;
+
     public Problem saveProblem(Problem problem, int uid, int mid) {
         Problem saved = problemRepository.save(problem);
         Customer customer = customerRepository.findById(uid);
         Optional<MistiriDetail> mistiri = mistiriRepository.findById(mid);
 
-        //sending sms
-        String m1 = "Hello Sir, " + customer.getFirstName() + " " + customer.getLastName() + " hired you. \n" + "Problem Description: " + saved.getDescription() + "\n" +
+        //sending sms to mistiri
+        String msgMistiri = "Hello " + mistiri.get().getCustomer().getFirstName() + "Ji, \n" + customer.getFirstName() + " " + customer.getLastName() + " hired you. \n" + "Problem Description: " + saved.getDescription() + "\n" +
                 "Urgency: " + saved.getUrgency() + "\nProblem Id: #" + saved.getId() + "\n" + "Customer Phone Number : " + customer.getPhoneNo() +
                 "\nPlease contact the customer.\n" +
                 "- Hamro Mistiri";
-        smsService.sendSms(mistiri.get().getCustomer().getPhoneNo(), m1);
+        smsService.sendSms(mistiri.get().getCustomer().getPhoneNo(), msgMistiri);
+
+        //sending mail to user
+        emailSender.sendEmail(customer.getEmail(),
+                "Hello " +customer.getFirstName()+ " Ji, \n" + "You have hired a professional. Please wait for them to contact you." +
+                        " \n" + "Problem Id: #" + saved.getId()+"\n-Hamro Mistiri",
+                "Your enquires have been sent.");
+
 
         return saved;
     }
