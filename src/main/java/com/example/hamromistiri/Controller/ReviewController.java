@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class ReviewController {
 
    @Autowired
@@ -25,7 +26,7 @@ public class ReviewController {
         return reviewService.reviews();
     }
 
-    @PostMapping("/{id}/addReview")
+    @PostMapping("/rateMe/{id}")
     public HttpStatus addReviews(@PathVariable int id,  @Valid @RequestBody ReviewDto review){
         reviewService.addReview(id,converter.DtoToEntity(review));
         return HttpStatus.OK;

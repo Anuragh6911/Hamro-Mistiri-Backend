@@ -24,6 +24,7 @@ public class MistiriDetailController {
     @Autowired
     private EntityToDtoConverter  converter;
 
+
     @PostMapping("/registerMistiri")
     public MistiriDetail signUpMistiri(@Valid @RequestBody MistiriSignupRequest request) throws AppException {
         return mistiriDetailsService.registerMistiri(request);
@@ -73,4 +74,6 @@ public class MistiriDetailController {
         List<MistiriDetail> mistiriDetails = mistiriDetailsService.findByService(service);
         return mistiriDetails;
    }
+
+
 }

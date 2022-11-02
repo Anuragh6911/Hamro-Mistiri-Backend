@@ -27,7 +27,7 @@ public class ReviewService {
         Review review1 = new Review();
         MistiriDetail mistiriDetail = mistiriDetailsService.findById(id);
         int count = mistiriDetail.getCount();
-        double newRating= 0;
+
         if(count == 0 ){
             count++;
             mistiriDetail.setRating(review.getIndivisualRating());
@@ -48,6 +48,7 @@ public class ReviewService {
             } else if(individualRating == 5.0){
                 individaulRatingPoints = 50;
             }
+              double newRating= 0.0d;
               double totalRating = individaulRatingPoints+ratingPoints;
               double divideByCount = totalRating/count;
               newRating = divideByCount/10;
