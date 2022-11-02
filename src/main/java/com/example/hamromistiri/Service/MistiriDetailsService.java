@@ -128,18 +128,26 @@ public class MistiriDetailsService {
         return message;
     }
 
-//    public MistiriDetail updateMistiri(MistiriDetail mistiri){
-//        MistiriDetail existingMistiri = misitiriDetailRepository.findByEmail(mistiri.getCustomer().getEmail());
-//        existingMistiri.getCustomer().setFirstName(mistiri.getCustomer().getFirstName());
-//        existingMistiri.getCustomer().setLastName(mistiri.getCustomer().getLastName());
-//        existingMistiri.getCustomer().setLocation(mistiri.getCustomer().getLocation());
-//        existingMistiri.setService(mistiri.getService());
-//        existingMistiri.setPanNo(mistiri.getPanNo());
-//        existingMistiri.setAboutYou(mistiri.getAboutYou());
-//
-//        return misitiriDetailRepository.save(existingMistiri);
-//
-//    }
+    public MistiriDetail updateMistiri(MistiriDetail mistiri){
+        MistiriDetail existingMistiri = misitiriDetailRepository.findById(mistiri.getId()).orElse(null);
+        existingMistiri.getCustomer().setFirstName(mistiri.getCustomer().getFirstName());
+        existingMistiri.getCustomer().setLastName(mistiri.getCustomer().getLastName());
+        existingMistiri.getCustomer().setLocation(mistiri.getCustomer().getLocation());
+        existingMistiri.getCustomer().setEmail(mistiri.getCustomer().getEmail());
+        existingMistiri.getCustomer().setPhoneNo(mistiri.getCustomer().getPhoneNo());
+        existingMistiri.setService(mistiri.getService());
+        existingMistiri.setPanNo(mistiri.getPanNo());
+        existingMistiri.setAboutYou(mistiri.getAboutYou());
+        existingMistiri.setAvailableStatus(mistiri.getAvailableStatus());
+        existingMistiri.setEmployeeStatus(mistiri.getEmployeeStatus());
+
+        return misitiriDetailRepository.save(existingMistiri);
+
+    }
+
+    public Optional<MistiriDetail> getMistiri(int id){
+        return misitiriDetailRepository.findById(id);
+    }
 
 
     public List<MistiriDetail> findAll() {

@@ -116,6 +116,10 @@ public class CustomerServices {
     }
 
 
+    public Customer getCustomer(int id){
+        return customerRepository.findById(id);
+    }
+
 //    public Customer saveCustomer(Customer customer){
 //        return customerRepository.save(customer);
 //    }
