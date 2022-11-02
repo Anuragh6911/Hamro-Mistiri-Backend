@@ -1,6 +1,7 @@
 package com.example.hamromistiri.Controller;
 
 import com.example.hamromistiri.Dto.ApiResponse;
+import com.example.hamromistiri.Dto.CustomerDto;
 import com.example.hamromistiri.Dto.CustomerLoginRequest;
 import com.example.hamromistiri.Dto.CustomerSignupRequest;
 import com.example.hamromistiri.Model.Customer;
@@ -39,7 +40,22 @@ public class CustomerController {
     public String verifyCustomer(@PathVariable int id,
                                              @PathVariable String token){
         return customerServices.verify(id,token);
+    }
 
+    @PutMapping("/updateCustomer")
+    public String updateCustomerData(@RequestBody Customer customer) throws AppException{
+        customerServices.updateCustomer(customer);
+        return "Your profile is updated successfully.";
+    }
+
+    @DeleteMapping("/deleteCustomer/{id}")
+    public String deleteCustomer(@PathVariable int id){
+        return customerServices.deleteCustomer(id);
+    }
+
+    @GetMapping("customerDashboard/{id}")
+    public Customer getCustomer(@PathVariable int id){
+        return customerServices.getCustomer(id);
     }
 
 

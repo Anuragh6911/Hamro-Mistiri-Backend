@@ -19,16 +19,16 @@ public class Problem {
 
     private String category;
 
+    private String urgency;
+
     private String description;
 
-    private String problemImage;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="customer_problem_id",referencedColumnName = "id")
+    @JoinColumn(name="customer_id",referencedColumnName = "id")
     private Customer customer;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="eqnuiry_id",referencedColumnName = "mistiri_id")
+    @JoinColumn(name="mistiri_id",referencedColumnName = "mistiri_id")
     private MistiriDetail mistiriDetail;
 
 }

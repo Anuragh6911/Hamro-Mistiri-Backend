@@ -7,13 +7,13 @@ import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Service.MistiriDetailsService;
 import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*") //.env file limited allowed origins
@@ -50,6 +50,19 @@ public class MistiriDetailController {
         return mistiriDetailsService.verify(id,token);
 
     }
+
+    @PutMapping("/updateMistiri")
+    public String updateMistiriData(MistiriDetail mistiri){
+        mistiriDetailsService.updateMistiri(mistiri);
+        return "Your profile is updated successfully.";
+    }
+
+    @GetMapping("/mistiriDashboard/{id}")
+    public Optional<MistiriDetail> getMistiri(@PathVariable int id){
+        return mistiriDetailsService.getMistiri(id);
+    }
+
+
 
 //    @PostMapping("/mistiri/addMistiri")
 //    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){

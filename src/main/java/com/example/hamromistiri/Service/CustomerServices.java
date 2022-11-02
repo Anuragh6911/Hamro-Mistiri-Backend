@@ -99,8 +99,25 @@ public class CustomerServices {
         return message;
     }
 
+    public Customer updateCustomer(Customer customer){
+        Customer existingCustomer = customerRepository.findById(customer.getId());
+        existingCustomer.setFirstName(customer.getFirstName());
+        existingCustomer.setLastName(customer.getLastName());
+        existingCustomer.setPhoneNo(customer.getPhoneNo());
+        existingCustomer.setLocation(customer.getLocation());
+
+        return customerRepository.save(existingCustomer);
+    }
+
+    public String deleteCustomer(int id){
+        customerRepository.deleteById(id);
+        return "Your account is deleted successfully.";
+    }
 
 
+    public Customer getCustomer(int id){
+        return customerRepository.findById(id);
+    }
 
 //    public Customer saveCustomer(Customer customer){
 //        return customerRepository.save(customer);

@@ -16,6 +16,7 @@ import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -125,6 +126,27 @@ public class MistiriDetailsService {
         String message = "Your account is now activated";
 
         return message;
+    }
+
+    public MistiriDetail updateMistiri(MistiriDetail mistiri){
+        MistiriDetail existingMistiri = misitiriDetailRepository.findById(mistiri.getId()).orElse(null);
+        existingMistiri.getCustomer().setFirstName(mistiri.getCustomer().getFirstName());
+        existingMistiri.getCustomer().setLastName(mistiri.getCustomer().getLastName());
+        existingMistiri.getCustomer().setLocation(mistiri.getCustomer().getLocation());
+        existingMistiri.getCustomer().setEmail(mistiri.getCustomer().getEmail());
+        existingMistiri.getCustomer().setPhoneNo(mistiri.getCustomer().getPhoneNo());
+        existingMistiri.setService(mistiri.getService());
+        existingMistiri.setPanNo(mistiri.getPanNo());
+        existingMistiri.setAboutYou(mistiri.getAboutYou());
+        existingMistiri.setAvailableStatus(mistiri.getAvailableStatus());
+        existingMistiri.setEmployeeStatus(mistiri.getEmployeeStatus());
+
+        return misitiriDetailRepository.save(existingMistiri);
+
+    }
+
+    public Optional<MistiriDetail> getMistiri(int id){
+        return misitiriDetailRepository.findById(id);
     }
 
 
