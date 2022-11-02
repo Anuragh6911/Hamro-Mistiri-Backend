@@ -50,6 +50,14 @@ public class MistiriDetailController {
 
     }
 
+//    @PutMapping("/updateMistiri")
+//    public String updateMistiriData(MistiriDetail mistiri){
+//        mistiriDetailsService.updateMistiri(mistiri);
+//        return "Your profile is updated successfully.";
+//    }
+
+
+
 //    @PostMapping("/mistiri/addMistiri")
 //    public HttpStatus addMistiri(@Valid @RequestBody MistriAddDto mistiriDetail){
 //        mistiriDetailsService.addMistiri(converter.DtoToEntity(mistiriDetail));
