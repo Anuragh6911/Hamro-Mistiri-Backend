@@ -62,7 +62,6 @@ public class MistiriDetailsService {
         customer.setPhoneNo(request.getPhoneNo());
         customer.setRole("Mistiri");
 
-        
 
         customer.setLocation(request.getLocation());
         customer.setIsVerified(false);
@@ -128,13 +127,22 @@ public class MistiriDetailsService {
         return message;
     }
 
-    public MistiriDetail updateMistiri(MistiriDetail mistiri){
+    public MistiriDetail updateMistiri(MistiriDetail mistiri) {
+        System.out.println(mistiri.getId());
         MistiriDetail existingMistiri = misitiriDetailRepository.findById(mistiri.getId()).orElse(null);
-        existingMistiri.getCustomer().setFirstName(mistiri.getCustomer().getFirstName());
-        existingMistiri.getCustomer().setLastName(mistiri.getCustomer().getLastName());
-        existingMistiri.getCustomer().setLocation(mistiri.getCustomer().getLocation());
-        existingMistiri.getCustomer().setEmail(mistiri.getCustomer().getEmail());
-        existingMistiri.getCustomer().setPhoneNo(mistiri.getCustomer().getPhoneNo());
+
+        if (existingMistiri == null) {
+            throw new AppException("Mistiri not found", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        Customer customer = existingMistiri.getCustomer();
+        customer.setFirstName(mistiri.getCustomer().getFirstName());
+        customer.setLastName(mistiri.getCustomer().getLastName());
+        customer.setLocation(mistiri.getCustomer().getLocation());
+        customer.setEmail(mistiri.getCustomer().getEmail());
+        customer.setPhoneNo(mistiri.getCustomer().getPhoneNo());
+        customerRepository.save(customer);
+
         existingMistiri.setService(mistiri.getService());
         existingMistiri.setPanNo(mistiri.getPanNo());
         existingMistiri.setAboutYou(mistiri.getAboutYou());
@@ -145,7 +153,7 @@ public class MistiriDetailsService {
 
     }
 
-    public Optional<MistiriDetail> getMistiri(int id){
+    public Optional<MistiriDetail> getMistiri(int id) {
         return misitiriDetailRepository.findById(id);
     }
 
@@ -174,9 +182,9 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.save(mistiriDetail);
     }
 
-    public List<MistiriDetail> findByMistiri( String service,String address) {
+    public List<MistiriDetail> findByMistiri(String service, String address) {
         List<MistiriDetail> mistiriDetails = new ArrayList<>();
-        mistiriDetails.addAll(misitiriDetailRepository.findAvailableMistiri( service, address));
+        mistiriDetails.addAll(misitiriDetailRepository.findAvailableMistiri(service, address));
 //        mistiriDetails.addAll(misitiriDetailRepository.findNotByAddress(service, address));
         return mistiriDetails;
     }
@@ -185,7 +193,7 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Mistiri not found with id " + id));
     }
 
-    public List<MistiriDetail> findByService(String service){
+    public List<MistiriDetail> findByService(String service) {
         return misitiriDetailRepository.findByServices(service);
     }
 
