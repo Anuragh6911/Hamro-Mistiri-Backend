@@ -15,7 +15,6 @@ public class EntityToDtoConverter {
         CustomerDto dto = new CustomerDto();
         dto.setId(customer.getId());
         dto.setFirstName(customer.getFirstName());
-        dto.setLastName(customer.getLastName());
         return dto;
     }
 
@@ -23,7 +22,6 @@ public class EntityToDtoConverter {
         Customer customer = new Customer();
         customer.setId(customerDto.getId());
         customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
         return customer;
     }
 
@@ -75,8 +73,9 @@ public class EntityToDtoConverter {
         Review review = new Review();
         review.setId(reviewDto.getId());
         review.setComment(reviewDto.getComment());
-        review.setCustomer(DtoToEntity(reviewDto.getUser()));
+        review.setCustomer(DtoToEntity(reviewDto.getCustomerDto()));
         review.setMistiriDetail(reviewDto.getMistiriDetail());
+        review.setIndivisualRating(reviewDto.getIndivisualRating());
         return  review;
     }
 

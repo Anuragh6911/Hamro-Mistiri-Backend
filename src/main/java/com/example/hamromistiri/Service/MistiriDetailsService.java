@@ -64,7 +64,7 @@ public class MistiriDetailsService {
 
         
 
-        //customer.setLoction(request.getLocation());
+        customer.setLocation(request.getLocation());
         customer.setIsVerified(false);
 
 
@@ -79,7 +79,7 @@ public class MistiriDetailsService {
         mistiri.setEmployeeStatus(request.getEmployeeStatus());
         mistiri.setPanNo(request.getPanNo());
         mistiri.setRating(0.0d);
-        mistiri.setCount(request.getCount());
+        mistiri.setCount(0);
         mistiri.setDocuments(fileLocation);
 
         MistiriDetail saved = misitiriDetailRepository.save(mistiri);
@@ -190,4 +190,7 @@ public class MistiriDetailsService {
     }
 
 
+    public MistiriDetail findByaId(Integer id) {
+        return misitiriDetailRepository.findAvailableMistiriId(id);
+    }
 }

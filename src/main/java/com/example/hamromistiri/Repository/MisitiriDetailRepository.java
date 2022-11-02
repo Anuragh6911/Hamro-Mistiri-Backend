@@ -12,6 +12,7 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
              "inner join customer c on u.customer_id = c.id\n" +
              "where c.location = ?2\n" +
              "  and u.available_status = true\n" +
+             "  and c.is_verified = true\n" +
              "  and u.service = ?1\n" +
              "order by u.rating desc")
      List<MistiriDetail> findAvailableMistiri( String service,String address);
@@ -29,9 +30,17 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
 
     @Query(nativeQuery = true, value = "select *\n" +
             "from mistiri_detail u\n" +
-            "  where u.available_status = true\n" +
+            "inner join customer c on u.customer_id = c.id\n" +
+            "  and u.available_status = true\n" +
+            "  and c.is_verified = true\n" +
             "  and u.service = ?1\n" +
             "order by u.rating desc")
     List<MistiriDetail> findByServices(String service);
+
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from mistiri_detail u\n" +
+            "where u.mistiri_id = ?1\n")
+    MistiriDetail findAvailableMistiriId( Integer id);
 
 }

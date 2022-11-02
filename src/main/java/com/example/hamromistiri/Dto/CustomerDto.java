@@ -14,7 +14,4 @@ public class CustomerDto {
     @NotEmpty(message = "FirstName cannot be null")
     private String firstName;
 
-    @NotEmpty(message = "LastName cannot be null")
-    private String lastName;
-
 }
