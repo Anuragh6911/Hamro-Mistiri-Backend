@@ -51,7 +51,7 @@ public class MistiriDetailController {
     }
 
     @PutMapping("/updateMistiri")
-    public String updateMistiriData(MistiriDetail mistiri){
+    public String updateMistiriData(@RequestBody MistiriDetail mistiri){
         mistiriDetailsService.updateMistiri(mistiri);
         return "Your profile is updated successfully.";
     }
