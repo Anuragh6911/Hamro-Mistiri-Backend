@@ -16,6 +16,7 @@ import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -126,6 +127,19 @@ public class MistiriDetailsService {
 
         return message;
     }
+
+//    public MistiriDetail updateMistiri(MistiriDetail mistiri){
+//        MistiriDetail existingMistiri = misitiriDetailRepository.findByEmail(mistiri.getCustomer().getEmail());
+//        existingMistiri.getCustomer().setFirstName(mistiri.getCustomer().getFirstName());
+//        existingMistiri.getCustomer().setLastName(mistiri.getCustomer().getLastName());
+//        existingMistiri.getCustomer().setLocation(mistiri.getCustomer().getLocation());
+//        existingMistiri.setService(mistiri.getService());
+//        existingMistiri.setPanNo(mistiri.getPanNo());
+//        existingMistiri.setAboutYou(mistiri.getAboutYou());
+//
+//        return misitiriDetailRepository.save(existingMistiri);
+//
+//    }
 
 
     public List<MistiriDetail> findAll() {

@@ -12,16 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @RequiredArgsConstructor
 public class HamroMistiriApplication {
-    private final SmsService smsService;
+//    private final SmsService smsService;
 
     public static void main(String[] args) {
         SpringApplication.run(HamroMistiriApplication.class, args);
     }
 
-    @Bean
-    ApplicationRunner runner(){
-        return args -> {
-            smsService.sendSms("9845637176","Hello from Hamro Mistiri family");
-        };
-    }
+//    @Bean
+//    ApplicationRunner runner(){
+//        return args -> {
+//            smsService.sendSms("9845637176","Hello from Hamro Mistiri family");
+//        };
+//    }
     }
