@@ -53,6 +53,11 @@ public class CustomerController {
         return customerServices.deleteCustomer(id);
     }
 
+    @GetMapping("customerDashboard/{id}")
+    public Customer getCustomer(@PathVariable int id){
+        return customerServices.getCustomer(id);
+    }
+
 
 //    @PostMapping("/registerNewCustomer")
 //    public Customer registerNewCustomer(@RequestBody Customer customer) {
