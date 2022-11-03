@@ -9,6 +9,7 @@ import com.example.hamromistiri.Repository.ProblemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,16 +30,26 @@ public class ProblemService {
     private EmailSenderService emailSender;
 
     public Problem saveProblem(Problem problem, int uid, int mid) {
-        Problem saved = problemRepository.save(problem);
+        Problem saved = new Problem();
+
         Customer customer = customerRepository.findById(uid);
-        Optional<MistiriDetail> mistiri = mistiriRepository.findById(mid);
+        MistiriDetail mistiri = mistiriRepository.findById(mid).orElse(null);
+
+        saved.setCustomer(customer);
+        saved.setMistiriDetail(mistiri);
+
+        saved.setCategory(problem.getCategory());
+        saved.setDescription(problem.getDescription());
+        saved.setUrgency(problem.getUrgency());
+
+        problemRepository.save(saved);
 
         //sending sms to mistiri
-        String msgMistiri = "Hello " + mistiri.get().getCustomer().getFirstName() + "Ji, \n" + customer.getFirstName() + " " + customer.getLastName() + " hired you. \n" + "Problem Description: " + saved.getDescription() + "\n" +
+        String msgMistiri = "Hello " + mistiri.getCustomer().getFirstName() + "Ji, \n" + customer.getFirstName() + " " + customer.getLastName() + " hired you. \n" + "Problem Description: " + saved.getDescription() + "\n" +
                 "Urgency: " + saved.getUrgency() + "\nProblem Id: #" + saved.getId() + "\n" + "Customer Phone Number : " + customer.getPhoneNo() +
                 "\nPlease contact the customer.\n" +
                 "- Hamro Mistiri";
-        smsService.sendSms(mistiri.get().getCustomer().getPhoneNo(), msgMistiri);
+        smsService.sendSms(mistiri.getCustomer().getPhoneNo(), msgMistiri);
 
         //sending mail to user
         emailSender.sendEmail(customer.getEmail(),
@@ -46,11 +57,18 @@ public class ProblemService {
                         " \n" + "Problem Id: #" + saved.getId()+"\n-Hamro Mistiri",
                 "Your enquires have been sent.");
 
-
         return saved;
     }
 
     public Problem displayProblem(int id) {
         return problemRepository.findById(id).orElse(null);
+    }
+
+    public List<Problem> viewMistiriHistory(int mid) {
+        return problemRepository.findProblemByMistiriId(mid);
+    }
+
+    public List<Problem> viewCustomerHistory(int uid) {
+        return  problemRepository.findProblemByCustomerId(uid);
     }
 }
