@@ -27,7 +27,7 @@ public class Review {
     @Valid
     private Customer customer;
 
-
+     //many to one maping left to see
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mistiriReview_id", referencedColumnName = "mistiri_id")
     private MistiriDetail mistiriDetail;
