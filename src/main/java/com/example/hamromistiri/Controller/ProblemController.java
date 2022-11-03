@@ -5,6 +5,8 @@ import com.example.hamromistiri.Service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProblemController {
 
@@ -22,5 +24,13 @@ public class ProblemController {
         return problemService.displayProblem(id);
     }
 
+    @GetMapping("/mistiriHistory/{mid}")
+    public List<Problem> viewMistiriHistory(@PathVariable int mid){
+        return problemService.viewMistiriHistory(mid);
+    }
 
+    @GetMapping("/customerHistory/{uid}")
+    public List<Problem> viewCustomerHistory(@PathVariable int uid){
+        return problemService.viewCustomerHistory(uid);
+    }
 }

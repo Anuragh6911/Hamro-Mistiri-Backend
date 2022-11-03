@@ -10,11 +10,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Table(name="user_problem")
+@Table(name = "user_problem")
 public class Problem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name ="problem_id")
+    @Column(name = "problem_id")
     private int id;
 
     private String category;
@@ -23,12 +23,13 @@ public class Problem {
 
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="customer_id",referencedColumnName = "id")
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="mistiri_id",referencedColumnName = "mistiri_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "mistiri_id", referencedColumnName = "mistiri_id")
     private MistiriDetail mistiriDetail;
 
 }
