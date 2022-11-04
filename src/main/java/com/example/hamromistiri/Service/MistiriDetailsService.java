@@ -157,6 +157,9 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.findById(id);
     }
 
+    public MistiriDetail getMistiriByCostumerId(int id) {
+        return misitiriDetailRepository.findByCustomerId(id);
+    }
 
     public List<MistiriDetail> findAll() {
         return misitiriDetailRepository.findAll();
