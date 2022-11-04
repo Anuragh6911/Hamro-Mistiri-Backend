@@ -57,6 +57,7 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
             " where u.customer_id = ?1\n")
     MistiriDetail findByCustomerId(int customerId);
 
+
 }
 
 
