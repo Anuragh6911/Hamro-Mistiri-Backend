@@ -143,6 +143,8 @@ public class MistiriDetailsService {
         customer.setPhoneNo(mistiri.getCustomer().getPhoneNo());
         customerRepository.save(customer);
 
+        existingMistiri.setCount(mistiri.getCount());
+
         existingMistiri.setService(mistiri.getService());
         existingMistiri.setPanNo(mistiri.getPanNo());
         existingMistiri.setAboutYou(mistiri.getAboutYou());
@@ -200,5 +202,9 @@ public class MistiriDetailsService {
 
     public MistiriDetail findByaId(Integer id) {
         return misitiriDetailRepository.findAvailableMistiriId(id);
+    }
+
+    public void deleteMistiri(int id) throws AppException{
+        misitiriDetailRepository.deleteMistiriByCustomerId(id);
     }
 }

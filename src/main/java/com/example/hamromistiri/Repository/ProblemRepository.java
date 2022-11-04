@@ -4,6 +4,7 @@ import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Model.Problem;
 import com.example.hamromistiri.Model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +22,11 @@ public interface ProblemRepository extends JpaRepository<Problem,Integer> {
             "from user_problem u\n" +
             "where u.customer_id = ?1\n")
     List<Problem> findProblemByCustomerId(int mid);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "delete \n" +
+            "from user_problem u\n" +
+            "where u.customer_id = ?1\n")
+    void deleteProblemByCustomerId(int uid);
 
 }

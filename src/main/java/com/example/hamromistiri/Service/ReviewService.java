@@ -3,6 +3,7 @@ import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Model.Review;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
 import com.example.hamromistiri.Repository.ReviewRepository;
+import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,4 +68,7 @@ public class ReviewService {
        return reviewRepository.findReviewFromMistiriId(id);
     }
 
+    public void deleteReview(int id) throws AppException {
+        reviewRepository.deleteReviewByCustomerId(id);
+    }
 }

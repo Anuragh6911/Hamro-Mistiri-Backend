@@ -2,6 +2,7 @@ package com.example.hamromistiri.Repository;
 
 import com.example.hamromistiri.Model.MistiriDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
@@ -42,5 +43,11 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
             "from mistiri_detail u\n" +
             "where u.mistiri_id = ?1\n")
     MistiriDetail findAvailableMistiriId( Integer id);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "delete \n" +
+            "from mistiri_detail u\n" +
+            "where u.customer_id = ?1\n")
+    void deleteMistiriByCustomerId(int uid);
 
 }

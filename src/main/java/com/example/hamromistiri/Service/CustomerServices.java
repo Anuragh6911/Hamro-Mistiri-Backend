@@ -4,12 +4,16 @@ import com.example.hamromistiri.Dto.CustomerLoginRequest;
 import com.example.hamromistiri.Dto.CustomerSignupRequest;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Repository.CustomerRepository;
+import com.example.hamromistiri.Repository.MisitiriDetailRepository;
+import com.example.hamromistiri.Repository.ProblemRepository;
+import com.example.hamromistiri.Repository.ReviewRepository;
 import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +22,16 @@ public class CustomerServices {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private MistiriDetailsService mistiriDetailsService;
+
+    @Autowired
+    private ProblemService problemService;
+
+    @Autowired
+    private  ReviewService reviewService;
+
     @Autowired
     private EmailSenderService emailSender;
 
@@ -109,11 +123,14 @@ public class CustomerServices {
         return customerRepository.save(existingCustomer);
     }
 
+    @Transactional
     public String deleteCustomer(int id){
+        mistiriDetailsService.deleteMistiri(id);
+        problemService.deleteProblem(id);
+        reviewService.deleteReview(id);
         customerRepository.deleteById(id);
         return "Your account is deleted successfully.";
     }
-
 
     public Customer getCustomer(int id){
         return customerRepository.findById(id);

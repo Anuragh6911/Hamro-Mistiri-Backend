@@ -6,6 +6,7 @@ import com.example.hamromistiri.Model.Problem;
 import com.example.hamromistiri.Repository.CustomerRepository;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
 import com.example.hamromistiri.Repository.ProblemRepository;
+import com.example.hamromistiri.exception.AppException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +71,9 @@ public class ProblemService {
 
     public List<Problem> viewCustomerHistory(int uid) {
         return  problemRepository.findProblemByCustomerId(uid);
+    }
+
+    public void deleteProblem(int id) throws AppException {
+        problemRepository.deleteProblemByCustomerId(id);
     }
 }
