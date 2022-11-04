@@ -17,8 +17,6 @@ public class Problem {
     @Column(name = "problem_id")
     private int id;
 
-    private String category;
-
     private String urgency;
 
     private String description;
