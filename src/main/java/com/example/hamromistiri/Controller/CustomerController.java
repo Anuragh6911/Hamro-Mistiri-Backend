@@ -49,7 +49,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/deleteCustomer/{id}")
-    public String deleteCustomer(@PathVariable int id){
+    public String deleteCustomer(@PathVariable int id) throws AppException{
         return customerServices.deleteCustomer(id);
     }
 

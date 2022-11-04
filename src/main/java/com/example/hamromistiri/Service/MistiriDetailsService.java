@@ -203,4 +203,8 @@ public class MistiriDetailsService {
     }
 
 
+    public void deleteMistiri(int id) throws AppException{
+        misitiriDetailRepository.deleteMistiriByCustomerId(id);
+    }
+
 }

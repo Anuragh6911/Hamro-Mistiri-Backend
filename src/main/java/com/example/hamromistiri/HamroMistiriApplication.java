@@ -1,6 +1,5 @@
 package com.example.hamromistiri;
 
-import com.example.hamromistiri.Service.SmsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
