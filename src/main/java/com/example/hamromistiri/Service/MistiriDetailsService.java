@@ -127,6 +127,7 @@ public class MistiriDetailsService {
         return message;
     }
 
+
     public MistiriDetail updateMistiri(MistiriDetail mistiri) {
         System.out.println(mistiri.getId());
         MistiriDetail existingMistiri = misitiriDetailRepository.findById(mistiri.getId()).orElse(null);
@@ -139,15 +140,11 @@ public class MistiriDetailsService {
         customer.setFirstName(mistiri.getCustomer().getFirstName());
         customer.setLastName(mistiri.getCustomer().getLastName());
         customer.setLocation(mistiri.getCustomer().getLocation());
-        customer.setEmail(mistiri.getCustomer().getEmail());
-        customer.setPhoneNo(mistiri.getCustomer().getPhoneNo());
         customerRepository.save(customer);
 
-        existingMistiri.setService(mistiri.getService());
         existingMistiri.setPanNo(mistiri.getPanNo());
         existingMistiri.setAboutYou(mistiri.getAboutYou());
         existingMistiri.setAvailableStatus(mistiri.getAvailableStatus());
-        existingMistiri.setEmployeeStatus(mistiri.getEmployeeStatus());
 
         return misitiriDetailRepository.save(existingMistiri);
 
@@ -204,4 +201,6 @@ public class MistiriDetailsService {
     public MistiriDetail findByaId(Integer id) {
         return misitiriDetailRepository.findAvailableMistiriId(id);
     }
+
+
 }

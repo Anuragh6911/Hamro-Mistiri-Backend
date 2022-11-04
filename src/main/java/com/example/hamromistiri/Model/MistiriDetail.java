@@ -37,6 +37,22 @@ public class MistiriDetail {
     @Column(name ="documents")
     private  String documents;
 
+    @Override
+    public String toString() {
+        return "MistiriDetail{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", panNo='" + panNo + '\'' +
+                ", rating=" + rating +
+                ", service='" + service + '\'' +
+                ", availableStatus=" + availableStatus +
+                ", employeeStatus='" + employeeStatus + '\'' +
+                ", documents='" + documents + '\'' +
+                ", aboutYou='" + aboutYou + '\'' +
+                ", count=" + count +
+                '}';
+    }
+
     @Column(name ="about_you")
     private String aboutYou;
 
