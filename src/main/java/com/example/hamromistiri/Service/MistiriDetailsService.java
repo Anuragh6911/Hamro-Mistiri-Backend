@@ -127,6 +127,7 @@ public class MistiriDetailsService {
         return message;
     }
 
+
     public MistiriDetail updateMistiri(MistiriDetail mistiri) {
         System.out.println(mistiri.getId());
         MistiriDetail existingMistiri = misitiriDetailRepository.findById(mistiri.getId()).orElse(null);
@@ -139,17 +140,11 @@ public class MistiriDetailsService {
         customer.setFirstName(mistiri.getCustomer().getFirstName());
         customer.setLastName(mistiri.getCustomer().getLastName());
         customer.setLocation(mistiri.getCustomer().getLocation());
-        customer.setEmail(mistiri.getCustomer().getEmail());
-        customer.setPhoneNo(mistiri.getCustomer().getPhoneNo());
         customerRepository.save(customer);
 
-        existingMistiri.setCount(mistiri.getCount());
-
-        existingMistiri.setService(mistiri.getService());
         existingMistiri.setPanNo(mistiri.getPanNo());
         existingMistiri.setAboutYou(mistiri.getAboutYou());
         existingMistiri.setAvailableStatus(mistiri.getAvailableStatus());
-        existingMistiri.setEmployeeStatus(mistiri.getEmployeeStatus());
 
         return misitiriDetailRepository.save(existingMistiri);
 
@@ -159,6 +154,9 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.findById(id);
     }
 
+    public MistiriDetail getMistiriByCostumerId(int id) {
+        return misitiriDetailRepository.findByCustomerId(id);
+    }
 
     public List<MistiriDetail> findAll() {
         return misitiriDetailRepository.findAll();
@@ -204,7 +202,9 @@ public class MistiriDetailsService {
         return misitiriDetailRepository.findAvailableMistiriId(id);
     }
 
+
     public void deleteMistiri(int id) throws AppException{
         misitiriDetailRepository.deleteMistiriByCustomerId(id);
     }
+
 }

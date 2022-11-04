@@ -57,9 +57,22 @@ public class MistiriDetailController {
         return "Your profile is updated successfully.";
     }
 
-    @GetMapping("/mistiriDashboard/{id}")
+
+//    @PutMapping("/updateMistiri/{id}")
+//    public String updateMistiriData(@PathVariable int userId, @RequestBody MistiriDetail mistiriDetail){
+//        System.out.println("from controller");
+//        mistiriDetailsService.updateMistiriFromUserId(userId,mistiriDetail);
+//        return "Your profile is updated successfully.";
+//    }
+
+    @GetMapping("/mistiri/{id}")
     public Optional<MistiriDetail> getMistiri(@PathVariable int id){
         return mistiriDetailsService.getMistiri(id);
+    }
+
+    @GetMapping("/mistiriDashboard/{id}")
+    public MistiriDetail getMistiriByCustomerID(@PathVariable int id){
+        return mistiriDetailsService.getMistiriByCostumerId(id);
     }
 
 

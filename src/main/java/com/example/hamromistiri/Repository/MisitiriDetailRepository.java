@@ -32,7 +32,7 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
     @Query(nativeQuery = true, value = "select *\n" +
             "from mistiri_detail u\n" +
             "inner join customer c on u.customer_id = c.id\n" +
-            "  and u.available_status = true\n" +
+            " where u.available_status = true\n" +
             "  and c.is_verified = true\n" +
             "  and u.service = ?1\n" +
             "order by u.rating desc")
@@ -44,10 +44,18 @@ public interface MisitiriDetailRepository extends JpaRepository<MistiriDetail,In
             "where u.mistiri_id = ?1\n")
     MistiriDetail findAvailableMistiriId( Integer id);
 
+
     @Modifying
     @Query(nativeQuery = true, value = "delete \n" +
             "from mistiri_detail u\n" +
             "where u.customer_id = ?1\n")
     void deleteMistiriByCustomerId(int uid);
 
-}
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from mistiri_detail u\n" +
+            " where u.customer_id = ?1\n")
+    MistiriDetail findByCustomerId(int customerId);
+
+
+

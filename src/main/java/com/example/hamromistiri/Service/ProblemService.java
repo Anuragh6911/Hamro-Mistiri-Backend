@@ -38,8 +38,6 @@ public class ProblemService {
 
         saved.setCustomer(customer);
         saved.setMistiriDetail(mistiri);
-
-        saved.setCategory(problem.getCategory());
         saved.setDescription(problem.getDescription());
         saved.setUrgency(problem.getUrgency());
 

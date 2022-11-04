@@ -12,6 +12,10 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review,Integer> {
 
+
+    @Query(nativeQuery = true, value = "select * from review u where  u.mistiri_review_id = ?1 and u.user_review_id = ?2")
+    Review findReviewByMistriAndCustomerId(Integer mistiriId,Integer customerId);
+
     @Query("select u from Review u where u.mistiriDetail.id = :num")
     List<Review> findReviewFromMistiriId(int num);
 
