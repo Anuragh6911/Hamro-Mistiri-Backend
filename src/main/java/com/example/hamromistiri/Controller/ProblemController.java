@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
+@CrossOrigin("*")
 public class ProblemController {
 
     @Autowired
@@ -18,7 +20,6 @@ public class ProblemController {
     public Problem addProblem(@RequestBody Problem problem, @PathVariable int uid, @PathVariable int mid){
         return problemService.saveProblem(problem, uid, mid);
     }
-
     @GetMapping("/viewProblem/{id}")
     public Problem viewProblem(@PathVariable int id){
         return problemService.displayProblem(id);
