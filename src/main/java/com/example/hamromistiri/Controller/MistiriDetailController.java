@@ -57,9 +57,14 @@ public class MistiriDetailController {
         return "Your profile is updated successfully.";
     }
 
-    @GetMapping("/mistiriDashboard/{id}")
+    @GetMapping("/mistiri/{id}")
     public Optional<MistiriDetail> getMistiri(@PathVariable int id){
         return mistiriDetailsService.getMistiri(id);
+    }
+
+    @GetMapping("/mistiriDashboard/{id}")
+    public MistiriDetail getMistiriByCustomerID(@PathVariable int id){
+        return mistiriDetailsService.getMistiriByCostumerId(id);
     }
 
 
