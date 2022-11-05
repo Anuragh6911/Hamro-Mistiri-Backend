@@ -136,6 +136,7 @@ public class CustomerServices {
         mistiriDetailsService.deleteMistiri(id);
         problemService.deleteProblem(id);
         reviewService.deleteReview(id);
+
         customerRepository.deleteById(id);
         return "Your account is deleted successfully.";
     }
@@ -151,6 +152,5 @@ public class CustomerServices {
     public List<Customer> getUser() {
         return customerRepository.findAll();
     }
-
 
 }

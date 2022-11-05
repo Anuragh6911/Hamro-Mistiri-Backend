@@ -51,6 +51,7 @@ public class CustomerController {
         return ResponseEntity.ok(new ApiResponse("Success","Deleted successfully"));
     }
 
+
     @GetMapping("customerDashboard/{id}")
     public Customer getCustomer(@PathVariable int id){
         return customerServices.getCustomer(id);

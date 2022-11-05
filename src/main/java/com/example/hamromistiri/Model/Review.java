@@ -29,7 +29,7 @@ public class Review {
 
      //many to one maping left to see
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mistiriReview_id", referencedColumnName = "mistiri_id")
+    @JoinColumn(name = "mistiri_review_id", referencedColumnName = "mistiri_id")
     private MistiriDetail mistiriDetail;
 
 }
