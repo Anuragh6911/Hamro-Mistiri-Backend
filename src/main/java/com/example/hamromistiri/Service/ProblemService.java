@@ -44,7 +44,7 @@ public class ProblemService {
         problemRepository.save(saved);
 
         //sending sms to mistiri
-        String msgMistiri = "Hello " + mistiri.getCustomer().getFirstName() + "Ji, \n" + customer.getFirstName() + " " + customer.getLastName() + " hired you. \n" + "Problem Description: " + saved.getDescription() + "\n" +
+        String msgMistiri = "Hello " + mistiri.getCustomer().getFirstName() + " Ji, \n" + customer.getFirstName() + " " + customer.getLastName() + " hired you. \n" + "Problem Description: " + saved.getDescription() + "\n" +
                 "Urgency: " + saved.getUrgency() + "\nProblem Id: #" + saved.getId() + "\n" + "Customer Phone Number : " + customer.getPhoneNo() +
                 "\nPlease contact the customer.\n" +
                 "- Hamro Mistiri";
