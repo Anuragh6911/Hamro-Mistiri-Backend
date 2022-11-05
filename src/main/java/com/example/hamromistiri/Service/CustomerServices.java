@@ -125,9 +125,9 @@ public class CustomerServices {
 
     @Transactional
     public String deleteCustomer(int id){
-        mistiriDetailsService.deleteMistiri(id);
-        problemService.deleteProblem(id);
-        reviewService.deleteReview(id);
+        mistiriDetailsService.deleteMistiriWhenDeleteCustomer(id);
+        problemService.deleteProblemWhenDeleteCustomer(id);
+        reviewService.deleteReviewWhenDeleteCustomer(id);
         customerRepository.deleteById(id);
         return "Your account is deleted successfully.";
     }
@@ -143,6 +143,5 @@ public class CustomerServices {
     public List<Customer> getUser() {
         return customerRepository.findAll();
     }
-
 
 }

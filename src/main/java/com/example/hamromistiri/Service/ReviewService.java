@@ -75,7 +75,11 @@ public class ReviewService {
        return reviewRepository.findReviewFromMistiriId(id);
     }
 
-    public void deleteReview(int id) throws AppException {
+    public void deleteReviewWhenDeleteCustomer(int id) throws AppException {
         reviewRepository.deleteReviewByCustomerId(id);
+    }
+
+    public void deleteReviewWhenDeleteMistiri(int id){
+        reviewRepository.deleteReviewByMistiriId(id);
     }
 }

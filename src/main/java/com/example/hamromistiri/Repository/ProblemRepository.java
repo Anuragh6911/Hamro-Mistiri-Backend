@@ -29,4 +29,10 @@ public interface ProblemRepository extends JpaRepository<Problem,Integer> {
             "where u.customer_id = ?1\n")
     void deleteProblemByCustomerId(int uid);
 
+    // delete problems when mistiri is deleted.
+    @Modifying
+    @Query(nativeQuery = true, value = "delete \n" +
+            "from user_problem u\n" +
+            "where u.mistiri_id = ?1\n")
+    void deleteProblemByMistiriId(int mid);
 }

@@ -71,7 +71,11 @@ public class ProblemService {
         return  problemRepository.findProblemByCustomerId(uid);
     }
 
-    public void deleteProblem(int id) throws AppException {
+    public void deleteProblemWhenDeleteCustomer(int id) throws AppException {
         problemRepository.deleteProblemByCustomerId(id);
+    }
+
+    public void deleteProblemWhenDeleteMistiri(int id){
+        problemRepository.deleteProblemByMistiriId(id);
     }
 }

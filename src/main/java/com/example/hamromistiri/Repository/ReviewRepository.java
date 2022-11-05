@@ -25,4 +25,11 @@ public interface ReviewRepository extends JpaRepository<Review,Integer> {
             "where u.user_review_id = ?1\n")
     void deleteReviewByCustomerId(int uid);
 
+    @Modifying
+    @Query(nativeQuery = true, value = "delete \n" +
+            "from review u\n" +
+            "where u.mistiri_review_id = ?1\n")
+    void deleteReviewByMistiriId(int mid);
+
+
 }
