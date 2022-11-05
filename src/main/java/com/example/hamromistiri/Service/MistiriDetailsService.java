@@ -6,6 +6,7 @@ import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Repository.CustomerRepository;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
+import com.example.hamromistiri.Repository.ReviewRepository;
 import com.example.hamromistiri.exception.AppException;
 import com.example.hamromistiri.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class MistiriDetailsService {
 
     @Autowired
     private MisitiriDetailRepository misitiriDetailRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -36,6 +41,10 @@ public class MistiriDetailsService {
 
     @Autowired
     private GenerateTokenService generateTokenService;
+
+    @Autowired
+    private ProblemService problemService;
+
 
     @Transactional
     public MistiriDetail registerMistiri(MistiriSignupRequest request) throws AppException {
@@ -203,8 +212,19 @@ public class MistiriDetailsService {
     }
 
 
-    public void deleteMistiri(int id) throws AppException{
+    public void deleteMistiriWhenDeleteCustomer(int id) throws AppException{
         misitiriDetailRepository.deleteMistiriByCustomerId(id);
     }
 
+    @Transactional
+    public String deleteMistiri(int id) {
+        MistiriDetail mistiri = misitiriDetailRepository.findByCustomerId(id);
+        System.out.println(mistiri);
+        int mid = mistiri.getId();
+        problemService.deleteProblemWhenDeleteMistiri(mid);
+        reviewRepository.deleteReviewByMistiriId(mid);
+        customerRepository.deleteById(id);
+        misitiriDetailRepository.deleteById(mid);
+        return "Your account is deleted successfully";
+    }
 }

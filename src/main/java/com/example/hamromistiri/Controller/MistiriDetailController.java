@@ -101,5 +101,10 @@ public class MistiriDetailController {
         return mistiriDetails;
    }
 
+    @DeleteMapping("/deleteMistiri/{cid}")
+    public String deleteMistiri(@PathVariable int cid) throws AppException{
+        return mistiriDetailsService.deleteMistiri(cid);
+    }
+
 
 }
