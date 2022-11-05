@@ -1,9 +1,6 @@
 package com.example.hamromistiri.Controller;
 
-import com.example.hamromistiri.Dto.ApiResponse;
-import com.example.hamromistiri.Dto.CustomerDto;
-import com.example.hamromistiri.Dto.CustomerLoginRequest;
-import com.example.hamromistiri.Dto.CustomerSignupRequest;
+import com.example.hamromistiri.Dto.*;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Service.CustomerServices;
 import com.example.hamromistiri.exception.AppException;
@@ -49,8 +46,9 @@ public class CustomerController {
     }
 
     @DeleteMapping("/deleteCustomer/{id}")
-    public String deleteCustomer(@PathVariable int id) throws AppException{
-        return customerServices.deleteCustomer(id);
+    public ResponseEntity<?> deleteCustomer(@PathVariable int id,@RequestBody PasswordMatcher passwordMatcher) throws AppException{
+        customerServices.deleteCustomer(id,passwordMatcher);
+        return ResponseEntity.ok(new ApiResponse("Success","Deleted successfully"));
     }
 
     @GetMapping("customerDashboard/{id}")
