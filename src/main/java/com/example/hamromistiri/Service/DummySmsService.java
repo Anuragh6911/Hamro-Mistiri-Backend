@@ -2,7 +2,7 @@ package com.example.hamromistiri.Service;
 
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class DummySmsService implements SmsService{
 
     @Override

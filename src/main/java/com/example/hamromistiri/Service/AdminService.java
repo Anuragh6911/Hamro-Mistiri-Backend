@@ -72,4 +72,8 @@ public class AdminService {
 
     }
     }
+
+    public List<Customer> findALlCustomer() {
+        return customerRepository.findAllCustomer();
+    }
 }

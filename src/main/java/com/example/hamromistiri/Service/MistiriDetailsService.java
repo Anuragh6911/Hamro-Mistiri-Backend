@@ -89,7 +89,7 @@ public class MistiriDetailsService {
         mistiri.setPanNo(request.getPanNo());
         mistiri.setRating(0.0d);
         mistiri.setCount(0);
-        mistiri.setDocuments(fileLocation);
+
 
         MistiriDetail saved = misitiriDetailRepository.save(mistiri);
 
@@ -184,7 +184,6 @@ public class MistiriDetailsService {
         mistiriDetail1.setRating(mistiriDetail.getRating());
         mistiriDetail1.setService(mistiriDetail.getService());
         mistiriDetail1.setAboutYou(mistiriDetail.getAboutYou());
-        mistiriDetail1.setDocuments(mistiriDetail.getDocuments());
         mistiriDetail1.setAvailableStatus(mistiriDetail.getAvailableStatus());
         mistiriDetail1.setEmployeeStatus(mistiriDetail.getEmployeeStatus());
         mistiriDetail1.setPanNo(mistiriDetail.getPanNo());

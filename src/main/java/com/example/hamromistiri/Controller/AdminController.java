@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@CrossOrigin("*")
-@Controller
+
+@RestController
 @CrossOrigin("*")
 public class AdminController {
 
@@ -39,7 +39,7 @@ public class AdminController {
     }
 
     @Transactional
-    @GetMapping("/deleteCustomerByAdmin/{cid}")
+    @DeleteMapping("/deleteCustomerByAdmin/{cid}")
     public ResponseEntity<?> deleteCustomerByAdmin(@PathVariable int cid){
          adminService.deleteCustomerByAdmin(cid);
         return ResponseEntity.ok(new ApiResponse("Success", "Deleted successfully"));
@@ -47,10 +47,17 @@ public class AdminController {
 
 
     @Transactional
-    @GetMapping("/deleteMistiriByAdmin/{mid}")
+    @DeleteMapping("/deleteMistiriByAdmin/{mid}")
     public ResponseEntity<?> deleteMistiriByAdmin(@PathVariable int mid){
         adminService.deleteMistiriByAdmin(mid);
         return ResponseEntity.ok(new ApiResponse("Success", "Deleted successfully"));
+    }
+
+
+
+    @GetMapping("/findallcustomer")
+    public List<Customer> findAllCustomer(){
+        return  adminService.findALlCustomer();
     }
 
 

@@ -43,7 +43,6 @@ public class EntityToDtoConverter {
         mistiriDetail1.setCustomer(DtoToEntity(mistiriDetail.getUser()));
         mistiriDetail1.setCount(mistiriDetail.getCount());
         mistiriDetail1.setPanNo(mistiriDetail.getPanNo());
-        mistiriDetail1.setDocuments(mistiriDetail.getDocuments());
         mistiriDetail1.setService(mistiriDetail.getService());
         mistiriDetail1.setEmployeeStatus(mistiriDetail.getEmployeeStatus());
         mistiriDetail1.setRating(mistiriDetail.getRating());

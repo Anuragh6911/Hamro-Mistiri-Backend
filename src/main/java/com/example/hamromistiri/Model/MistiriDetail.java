@@ -34,8 +34,6 @@ public class MistiriDetail {
     @Column(name ="empolyee_status")
     private String employeeStatus;
 
-    @Column(name ="documents")
-    private  String documents;
 
     @Override
     public String toString() {
@@ -47,7 +45,6 @@ public class MistiriDetail {
                 ", service='" + service + '\'' +
                 ", availableStatus=" + availableStatus +
                 ", employeeStatus='" + employeeStatus + '\'' +
-                ", documents='" + documents + '\'' +
                 ", aboutYou='" + aboutYou + '\'' +
                 ", count=" + count +
                 '}';
