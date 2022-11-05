@@ -1,4 +1,5 @@
 package com.example.hamromistiri.Service;
+
 import com.example.hamromistiri.Model.MistiriDetail;
 import com.example.hamromistiri.Model.Review;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
@@ -20,14 +21,14 @@ public class ReviewService {
     @Autowired
     private MisitiriDetailRepository misitiriDetailRepository;
 
-    public List<Review> reviews(){
+    public List<Review> reviews() {
         return reviewRepository.findAll();
     }
 
-    public Review addReview(int id,Review review){
+    public Review addReview(int id, Review review) {
         Review review1 = new Review();
-        Review databaseReview = reviewRepository.findReviewByMistriAndCustomerId(id,review.getCustomer().getId());
-        if (databaseReview == null ) {
+        Review databaseReview = reviewRepository.findReviewByMistriAndCustomerId(id, review.getCustomer().getId());
+        if (databaseReview == null) {
             MistiriDetail mistiriDetail = mistiriDetailsService.findById(id);
             int count = mistiriDetail.getCount();
 
@@ -64,22 +65,48 @@ public class ReviewService {
             review1.setIndivisualRating(review.getIndivisualRating());
             review1.setCustomer(review.getCustomer());
             return reviewRepository.save(review1);
-        }else {
+        } else {
+
+            MistiriDetail mistiriDetail = mistiriDetailsService.findById(id);
+            int count = mistiriDetail.getCount();
+            double rating = mistiriDetail.getRating();
+            double ratingPoints = rating * count * 10;
+            count++;
+            double individaulRatingPoints = 0;
+            double individualRating = review.getIndivisualRating();
+            if (individualRating == 1.0) {
+                individaulRatingPoints = 10;
+            } else if (individualRating == 2.0) {
+                individaulRatingPoints = 20;
+            } else if (individualRating == 3.0) {
+                individaulRatingPoints = 30;
+            } else if (individualRating == 4.0) {
+                individaulRatingPoints = 40;
+            } else if (individualRating == 5.0) {
+                individaulRatingPoints = 50;
+            }
+            double newRating = 0.0d;
+            double totalRating = individaulRatingPoints + ratingPoints;
+            double divideByCount = totalRating / count;
+            newRating = divideByCount / 10;
+            mistiriDetail.setRating(newRating);
+            mistiriDetail.setCount(count);
+            misitiriDetailRepository.save(mistiriDetail);
             databaseReview.setComment(review.getComment());
             databaseReview.setIndivisualRating(review.getIndivisualRating());
             return reviewRepository.save(databaseReview);
         }
     }
 
-    public List<Review> showReviews(int id){
-       return reviewRepository.findReviewFromMistiriId(id);
+    public List<Review> showReviews(int id) {
+        return reviewRepository.findReviewFromMistiriId(id);
     }
 
     public void deleteReviewWhenDeleteCustomer(int id) throws AppException {
         reviewRepository.deleteReviewByCustomerId(id);
     }
 
-    public void deleteReviewWhenDeleteMistiri(int id){
+    public void deleteReviewWhenDeleteMistiri(int id) {
         reviewRepository.deleteReviewByMistiriId(id);
     }
 }
