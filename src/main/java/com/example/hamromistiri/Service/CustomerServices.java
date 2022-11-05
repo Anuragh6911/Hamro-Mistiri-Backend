@@ -2,6 +2,7 @@ package com.example.hamromistiri.Service;
 
 import com.example.hamromistiri.Dto.CustomerLoginRequest;
 import com.example.hamromistiri.Dto.CustomerSignupRequest;
+import com.example.hamromistiri.Dto.PasswordMatcher;
 import com.example.hamromistiri.Model.Customer;
 import com.example.hamromistiri.Repository.CustomerRepository;
 import com.example.hamromistiri.Repository.MisitiriDetailRepository;
@@ -124,10 +125,18 @@ public class CustomerServices {
     }
 
     @Transactional
-    public String deleteCustomer(int id){
-        mistiriDetailsService.deleteMistiriWhenDeleteCustomer(id);
-        problemService.deleteProblemWhenDeleteCustomer(id);
-        reviewService.deleteReviewWhenDeleteCustomer(id);
+    public String deleteCustomer(int id, PasswordMatcher passwordMatcher){
+        Customer customer = customerRepository.findById(id);
+        String encryptedPassword = DigestUtils.md5DigestAsHex(passwordMatcher.getPassword().getBytes());
+
+        if (!encryptedPassword.equals(customer.getPassword())) {
+            throw new AppException("Invalid Password", HttpStatus.FORBIDDEN);
+        }
+
+        mistiriDetailsService.deleteMistiri(id);
+        problemService.deleteProblem(id);
+        reviewService.deleteReview(id);
+
         customerRepository.deleteById(id);
         return "Your account is deleted successfully.";
     }
