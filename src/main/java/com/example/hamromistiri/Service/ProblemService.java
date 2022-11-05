@@ -64,7 +64,8 @@ public class ProblemService {
     }
 
     public List<Problem> viewMistiriHistory(int mid) {
-        return problemRepository.findProblemByMistiriId(mid);
+        MistiriDetail mistiriDetail = mistiriRepository.findByCustomerId(mid);
+        return problemRepository.findProblemByMistiriId(mistiriDetail.getId());
     }
 
     public List<Problem> viewCustomerHistory(int uid) {

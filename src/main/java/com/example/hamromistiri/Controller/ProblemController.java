@@ -25,9 +25,9 @@ public class ProblemController {
         return problemService.displayProblem(id);
     }
 
-    @GetMapping("/mistiriHistory/{mid}")
-    public List<Problem> viewMistiriHistory(@PathVariable int mid){
-        return problemService.viewMistiriHistory(mid);
+    @GetMapping("/mistiriHistory/{uid}")
+    public List<Problem> viewMistiriHistory(@PathVariable int uid){
+        return problemService.viewMistiriHistory(uid);
     }
 
     @GetMapping("/customerHistory/{uid}")
