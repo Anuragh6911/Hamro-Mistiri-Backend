@@ -22,7 +22,7 @@ public class MistiriDetailController {
     private MistiriDetailsService mistiriDetailsService;
 
     @Autowired
-    private EntityToDtoConverter  converter;
+    private EntityToDtoConverter converter;
 
 
     @PostMapping("/registerMistiri")
@@ -37,22 +37,19 @@ public class MistiriDetailController {
         session.setAttribute("email", customer.getEmail());
         session.setAttribute("firstName", customer.getFirstName());
         session.setAttribute("lastName", customer.getLastName());
-        return ResponseEntity.ok(new ApiResponse(customer,"Logged in successfully"));
+        return ResponseEntity.ok(new ApiResponse(customer, "Logged in successfully"));
     }
-
-
-
 
 
     @GetMapping("/verify/mistiri/{id}/{token}")
     public String verifyCustomer(@PathVariable int id,
-                                 @PathVariable String token){
-        return mistiriDetailsService.verify(id,token);
+                                 @PathVariable String token) {
+        return mistiriDetailsService.verify(id, token);
 
     }
 
     @PutMapping("/updateMistiri")
-    public String updateMistiriData(@RequestBody MistiriDetail mistiri){
+    public String updateMistiriData(@RequestBody MistiriDetail mistiri) {
         mistiriDetailsService.updateMistiri(mistiri);
         return "Your profile is updated successfully.";
     }
@@ -66,15 +63,14 @@ public class MistiriDetailController {
 //    }
 
     @GetMapping("/mistiri/{id}")
-    public Optional<MistiriDetail> getMistiri(@PathVariable int id){
+    public Optional<MistiriDetail> getMistiri(@PathVariable int id) {
         return mistiriDetailsService.getMistiri(id);
     }
 
     @GetMapping("/mistiriDashboard/{id}")
-    public MistiriDetail getMistiriByCustomerID(@PathVariable int id){
+    public MistiriDetail getMistiriByCustomerID(@PathVariable int id) {
         return mistiriDetailsService.getMistiriByCostumerId(id);
     }
-
 
 
 //    @PostMapping("/mistiri/addMistiri")
@@ -85,25 +81,28 @@ public class MistiriDetailController {
 
 
     @GetMapping("/mistiris")
-    public List<MistiriDetail> findall(){
-       return mistiriDetailsService.findAll();
-   }
+    public List<MistiriDetail> findall() {
+        return mistiriDetailsService.findAll();
+    }
 
-   @GetMapping("/mistiris/{services}/{address}")
-    public List<MistiriDetail> findAllByAddress( @PathVariable String services, @PathVariable String address){
-        List <MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(services,address);
+    @GetMapping("/mistiris/{services}/{address}")
+    public List<MistiriDetail> findAllByAddress(@PathVariable String services, @PathVariable String address) {
+        List<MistiriDetail> mistiriDetails = mistiriDetailsService.findByMistiri(services, address);
         return mistiriDetails;
-   }
+    }
 
-   @GetMapping("/mistiris/{service}")
-   public List<MistiriDetail> findByAddress(@PathVariable String service){
+    @GetMapping("/mistiris/{service}")
+    public List<MistiriDetail> findByAddress(@PathVariable String service) {
         List<MistiriDetail> mistiriDetails = mistiriDetailsService.findByService(service);
         return mistiriDetails;
-   }
+    }
 
     @DeleteMapping("/deleteMistiri/{cid}")
-    public String deleteMistiri(@PathVariable int cid) throws AppException{
-        return mistiriDetailsService.deleteMistiri(cid);
+    public ResponseEntity<?> deleteMistiri(@PathVariable int cid, @RequestBody PasswordMatcher passwordMatcher) throws AppException {
+
+        mistiriDetailsService.deleteMistiri(cid,passwordMatcher);
+
+        return ResponseEntity.ok(new ApiResponse("Success", "Deleted successfully"));
     }
 
 

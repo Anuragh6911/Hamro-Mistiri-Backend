@@ -133,9 +133,9 @@ public class CustomerServices {
             throw new AppException("Invalid Password", HttpStatus.FORBIDDEN);
         }
 
-        mistiriDetailsService.deleteMistiri(id);
-        problemService.deleteProblem(id);
-        reviewService.deleteReview(id);
+        mistiriDetailsService.deleteMistiriWhenDeleteCustomer(id);
+        problemService.deleteProblemWhenDeleteCustomer(id);
+        reviewService.deleteReviewWhenDeleteCustomer(id);
 
         customerRepository.deleteById(id);
         return "Your account is deleted successfully.";
