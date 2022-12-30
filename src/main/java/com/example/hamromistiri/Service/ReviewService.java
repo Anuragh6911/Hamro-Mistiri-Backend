@@ -29,6 +29,7 @@ public class ReviewService {
         Review review1 = new Review();
         Review databaseReview = reviewRepository.findReviewByMistriAndCustomerId(id, review.getCustomer().getId());
         if (databaseReview == null) {
+
             MistiriDetail mistiriDetail = mistiriDetailsService.findById(id);
             int count = mistiriDetail.getCount();
 
